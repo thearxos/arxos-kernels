@@ -1,0 +1,82 @@
+{
+  "manifest": "arxos-kernels/v1",
+  "updated": "2026-08-26",
+  "note": "Public history of every ARXOS kernel. Text only: the patch code and config stay private. Binaries live on Cloudflare R2 (current, fast) and archive.org / GitHub Releases (full history, rollback).",
+  "flavors": {
+    "linux-arxos": {
+      "role": "default daily driver",
+      "base": "CachyOS",
+      "current": "7.2.0-1"
+    }
+  },
+  "tunes": [
+    {
+      "name": "Live kernel patching",
+      "advantage": "Security and stability fixes can be applied to the running kernel without a reboot, so the machine stays up to date without downtime."
+    },
+    {
+      "name": "Kernel-level anonymity primitives",
+      "advantage": "The building blocks the ARXOS privacy tools rely on are compiled in: modern packet filtering, WireGuard, network and user isolation, and encrypted key storage. AnonKit and friends work at the kernel level, not bolted on top."
+    },
+    {
+      "name": "Low-level device access",
+      "advantage": "Fast, direct device input and output is enabled for the ARXOS device toolkit, including raw USB access and a high-performance I/O path. This is what lets droidB talk to hardware quickly and reliably."
+    },
+    {
+      "name": "Performance base",
+      "advantage": "ARXOS keeps the tuned CachyOS performance profile: a responsive desktop scheduler, faster network throughput, a high timer rate, full preemption for low latency, a modern CPU baseline, and better memory behaviour under load. The result is a system that feels quick and stays quick."
+    }
+  ],
+  "kernels": [
+    {
+      "flavor": "linux-arxos",
+      "version": "7.2.0-1",
+      "upstream": "Linux 7.2.0 (CachyOS build)",
+      "date": "2026-08",
+      "status": "current",
+      "changes": "Rebased onto the newer upstream (Linux 7.2.0 via CachyOS). Carries the full ARXOS tune set unchanged: live patching, kernel-level anonymity primitives, low-level device access, and the tuned performance base.",
+      "artifacts": {
+        "kernel": {
+          "file": "linux-arxos-7.2.0-1-x86_64.pkg.tar.zst",
+          "size": 156760061,
+          "sha256": "7bc73af79805ed2a2269aa102223904fe050cd50061b0d79aa8683b62713ab15"
+        },
+        "headers": {
+          "file": "linux-arxos-headers-7.2.0-1-x86_64.pkg.tar.zst",
+          "size": 44487225,
+          "sha256": "4fe5827cda27c67275b136f2b73b067ada8611d391cc1028f864de0fc22d9a2e"
+        }
+      },
+      "urls": {
+        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
+        "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-7.2.0-1/",
+        "archive_org": null
+      }
+    },
+    {
+      "flavor": "linux-arxos",
+      "version": "7.1.3-1",
+      "upstream": "Linux 7.1.3 (CachyOS build)",
+      "date": "2026-07",
+      "status": "retired",
+      "changes": "First CachyOS-based ARXOS kernel line. Established the ARXOS tune set over the stock CachyOS base. Superseded by 7.2.0-1.",
+      "artifacts": {
+        "kernel": {
+          "file": "linux-arxos-7.1.3-1-x86_64.pkg.tar.zst",
+          "size": null,
+          "sha256": null
+        },
+        "headers": {
+          "file": "linux-arxos-headers-7.1.3-1-x86_64.pkg.tar.zst",
+          "size": null,
+          "sha256": null
+        }
+      },
+      "urls": {
+        "r2": null,
+        "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-7.1.3-1/",
+        "archive_org": null
+      }
+    }
+  ]
+}
