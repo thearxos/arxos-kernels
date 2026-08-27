@@ -43,13 +43,13 @@
       "artifacts": {
         "kernel": {
           "file": "linux-arxos-rt-7.2.0-1-x86_64.pkg.tar.zst",
-          "size": 154676061,
-          "sha256": "2a218fadcceb4353c27a95530e445d725660ecb9a52506deff8a1a27b20c2554"
+          "size": 154665325,
+          "sha256": "f6ce34664c0ba433527b536fca99d5ac2b0fbf8335e55573cda174a138108ae6"
         },
         "headers": {
           "file": "linux-arxos-rt-headers-7.2.0-1-x86_64.pkg.tar.zst",
-          "size": 44137396,
-          "sha256": "7b31fd7407bfec00a287eabbc71cf9e915cb45af3f980029e1ead00ff3625b7c"
+          "size": 39274603,
+          "sha256": "de8cc8546ccf7065a06775d136eda8904ddbba0130d35054e875e3cc483fba68"
         }
       },
       "urls": {
@@ -68,13 +68,13 @@
       "artifacts": {
         "kernel": {
           "file": "linux-arxos-7.2.0-1-x86_64.pkg.tar.zst",
-          "size": 156760061,
-          "sha256": "7bc73af79805ed2a2269aa102223904fe050cd50061b0d79aa8683b62713ab15"
+          "size": 156745069,
+          "sha256": "361410e6973eb73f4cae859fde3a33c612c8922940f4928634ed86cc5d2c272d"
         },
         "headers": {
           "file": "linux-arxos-headers-7.2.0-1-x86_64.pkg.tar.zst",
-          "size": 44487225,
-          "sha256": "4fe5827cda27c67275b136f2b73b067ada8611d391cc1028f864de0fc22d9a2e"
+          "size": 39542944,
+          "sha256": "40b97f609efe1a095d6def8e68245e5ac32edd3d28e229f12019a7eb4d33f7ed"
         }
       },
       "urls": {

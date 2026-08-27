@@ -38,16 +38,16 @@ Newest first. Each entry says what changed against the kernel before it.
 - **Upstream base:** Linux 7.2.0 (ArxOS realtime build)
 - **Released:** 2026-08
 - **What changed:** Real-time flavor: PREEMPT_RT + BORE. Same ArxOS tuning and the same offensive/defensive tool support as linux-arxos, but with hard real-time preemption (bounded worst-case latency, threaded IRQs) for RF, SDR, and wireless capture where timing must be exact. Trades a little raw throughput for predictable latency; linux-arxos stays the default daily driver.
-- **Kernel:** `linux-arxos-rt-7.2.0-1-x86_64.pkg.tar.zst` (147.5 MB, sha256 `2a218fadcceb...`)
-- **Headers:** `linux-arxos-rt-headers-7.2.0-1-x86_64.pkg.tar.zst` (42.1 MB, sha256 `7b31fd7407bf...`)
+- **Kernel:** `linux-arxos-rt-7.2.0-1-x86_64.pkg.tar.zst` (147.5 MB, sha256 `f6ce34664c0b...`)
+- **Headers:** `linux-arxos-rt-headers-7.2.0-1-x86_64.pkg.tar.zst` (37.5 MB, sha256 `de8cc8546ccf...`)
 
 ### linux-arxos 7.2.0-1  (current)
 
 - **Upstream base:** Linux 7.2.0
 - **Released:** 2026-08
 - **What changed:** Rebased onto the newer upstream (Linux 7.2.0). Carries the full ARXOS tune set unchanged: live patching, kernel-level anonymity primitives, low-level device access, and the tuned performance base.
-- **Kernel:** `linux-arxos-7.2.0-1-x86_64.pkg.tar.zst` (149.5 MB, sha256 `7bc73af79805...`)
-- **Headers:** `linux-arxos-headers-7.2.0-1-x86_64.pkg.tar.zst` (42.4 MB, sha256 `4fe5827cda27...`)
+- **Kernel:** `linux-arxos-7.2.0-1-x86_64.pkg.tar.zst` (149.5 MB, sha256 `361410e6973e...`)
+- **Headers:** `linux-arxos-headers-7.2.0-1-x86_64.pkg.tar.zst` (37.7 MB, sha256 `40b97f609efe...`)
 
 ### linux-arxos 7.1.3-1  (retired)
 
