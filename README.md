@@ -16,8 +16,8 @@ _Manifest updated 2026-08-27._
 
 | Flavor | Role | Base | Current |
 | --- | --- | --- | --- |
-| `linux-arxos` | default daily driver | CachyOS | 7.2.0-1 |
-| `linux-arxos-rt` |  |  | 7.2.0-1 |
+| `linux-arxos` | default daily driver | Arch (ArxOS tuned) | 7.2.0-1 |
+| `linux-arxos-rt` | real-time (RF, SDR, wireless capture) | Arch (ArxOS tuned) | 7.2.0-1 |
 
 ## What ARXOS adds
 
@@ -27,7 +27,7 @@ Each one is here for a reason, not for a spec sheet:
 - **Live kernel patching.** Security and stability fixes can be applied to the running kernel without a reboot, so the machine stays up to date without downtime.
 - **Kernel-level anonymity primitives.** The building blocks the ARXOS privacy tools rely on are compiled in: modern packet filtering, WireGuard, network and user isolation, and encrypted key storage. AnonKit and friends work at the kernel level, not bolted on top.
 - **Low-level device access.** Fast, direct device input and output is enabled for the ARXOS device toolkit, including raw USB access and a high-performance I/O path. This is what lets droidB talk to hardware quickly and reliably.
-- **Performance base.** ARXOS keeps the tuned CachyOS performance profile: a responsive desktop scheduler, faster network throughput, a high timer rate, full preemption for low latency, a modern CPU baseline, and better memory behaviour under load. The result is a system that feels quick and stays quick.
+- **Performance base.** ARXOS keeps a tuned performance profile: a responsive desktop scheduler, faster network throughput, a high timer rate, full preemption for low latency, a modern CPU baseline, and better memory behaviour under load. The result is a system that feels quick and stays quick.
 
 ## History
 
@@ -43,17 +43,17 @@ Newest first. Each entry says what changed against the kernel before it.
 
 ### linux-arxos 7.2.0-1  (current)
 
-- **Upstream base:** Linux 7.2.0 (CachyOS build)
+- **Upstream base:** Linux 7.2.0
 - **Released:** 2026-08
-- **What changed:** Rebased onto the newer upstream (Linux 7.2.0 via CachyOS). Carries the full ARXOS tune set unchanged: live patching, kernel-level anonymity primitives, low-level device access, and the tuned performance base.
+- **What changed:** Rebased onto the newer upstream (Linux 7.2.0). Carries the full ARXOS tune set unchanged: live patching, kernel-level anonymity primitives, low-level device access, and the tuned performance base.
 - **Kernel:** `linux-arxos-7.2.0-1-x86_64.pkg.tar.zst` (149.5 MB, sha256 `7bc73af79805...`)
 - **Headers:** `linux-arxos-headers-7.2.0-1-x86_64.pkg.tar.zst` (42.4 MB, sha256 `4fe5827cda27...`)
 
 ### linux-arxos 7.1.3-1  (retired)
 
-- **Upstream base:** Linux 7.1.3 (CachyOS build)
+- **Upstream base:** Linux 7.1.3
 - **Released:** 2026-07
-- **What changed:** First CachyOS-based ARXOS kernel line. Established the ARXOS tune set over the stock CachyOS base. Superseded by 7.2.0-1.
+- **What changed:** First kernel of this ARXOS line. Established the ARXOS tune set over the tuned base. Superseded by 7.2.0-1.
 - **Kernel:** `linux-arxos-7.1.3-1-x86_64.pkg.tar.zst` (archived; hash restored when re-published)
 
 ## Getting a kernel

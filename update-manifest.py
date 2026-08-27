@@ -3,7 +3,7 @@
 README. Called by linux-arxos/kernel-publish.sh on a release; also runnable by hand.
 
     update-manifest.py --flavor linux-arxos --version 7.2.0-1 \
-        --upstream "Linux 7.2.0 (CachyOS build)" --date 2026-08 \
+        --upstream "Linux 7.2.0" --date 2026-08 \
         --changes "..." \
         --kernel FILE --kernel-sha SHA --kernel-size N \
         --headers FILE --headers-sha SHA --headers-size N \
