@@ -10,13 +10,14 @@ Binaries are hosted twice so every kernel stays reachable:
 - **Cloudflare R2** holds the current kernel for fast downloads.
 - **GitHub Releases and archive.org** hold the full history for rollback.
 
-_Manifest updated 2026-08-26._
+_Manifest updated 2026-08-27._
 
 ## Kernels
 
 | Flavor | Role | Base | Current |
 | --- | --- | --- | --- |
 | `linux-arxos` | default daily driver | CachyOS | 7.2.0-1 |
+| `linux-arxos-rt` |  |  | 7.2.0-1 |
 
 ## What ARXOS adds
 
@@ -31,6 +32,14 @@ Each one is here for a reason, not for a spec sheet:
 ## History
 
 Newest first. Each entry says what changed against the kernel before it.
+
+### linux-arxos-rt 7.2.0-1  (current)
+
+- **Upstream base:** Linux 7.2.0 (ArxOS realtime build)
+- **Released:** 2026-08
+- **What changed:** Real-time flavor: PREEMPT_RT + BORE. Same ArxOS tuning and the same offensive/defensive tool support as linux-arxos, but with hard real-time preemption (bounded worst-case latency, threaded IRQs) for RF, SDR, and wireless capture where timing must be exact. Trades a little raw throughput for predictable latency; linux-arxos stays the default daily driver.
+- **Kernel:** `linux-arxos-rt-7.2.0-1-x86_64.pkg.tar.zst` (147.5 MB, sha256 `2a218fadcceb...`)
+- **Headers:** `linux-arxos-rt-headers-7.2.0-1-x86_64.pkg.tar.zst` (42.1 MB, sha256 `7b31fd7407bf...`)
 
 ### linux-arxos 7.2.0-1  (current)
 
