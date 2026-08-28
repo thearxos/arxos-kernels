@@ -70,3 +70,9 @@ arxos-kernel install linux-arxos 7.1.3-1   # roll back to a specific version
 The current kernel downloads from R2; older versions come from the full history.
 Every download is checked against the sha256 in this manifest before it installs.
 
+
+---
+
+<div align="center">
+<sub><b>arxos-kernels</b> is part of the <b>ArxOS</b> project, built by <b>Stingray Labs</b>.</sub>
+</div>
