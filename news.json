@@ -1,0 +1,35 @@
+{
+  "updated": "2026-09-03",
+  "items": [
+    {
+      "date": "2026-09-03",
+      "tag": "Control Center",
+      "title": "Dashboard gains Anonymity, Storage, and a live update list",
+      "body": "The Command Deck now shows whether you are exiting through Tor (and how to turn it off), every drive with used/total space plus any unmounted disk, and the Update panel lists exactly which packages will update, by source."
+    },
+    {
+      "date": "2026-09-03",
+      "tag": "Network",
+      "title": "Turn interfaces on/off and manage Wi-Fi from the Network panel",
+      "body": "Each interface has a Turn on/off control (with a guard before disabling your primary link), and a Wi-Fi section for radio on/off, scanning, and connecting appears when a wireless device is present."
+    },
+    {
+      "date": "2026-09-03",
+      "tag": "Privacy",
+      "title": "Run any app inside a Tor-only namespace",
+      "body": "From the Privacy panel you can launch any app confined to a Tor-only network namespace, as your user, with the real interface unreachable to it. It starts Tor first if needed, showing the live bootstrap loader."
+    },
+    {
+      "date": "2026-09-03",
+      "tag": "AnonKit",
+      "title": "i2p overlay hardened and leak-tested; hostname and DNS fixes",
+      "body": "The optional i2p overlay was stress-tested for leaks alongside Tor, the hostname spoof now holds for the whole session, and stopping always restores working DNS."
+    },
+    {
+      "date": "2026-09-02",
+      "tag": "arx",
+      "title": "arx is now pure Rust",
+      "body": "The package manager was rebuilt on libalpm in-process for near-instant queries, with a supply-chain verify gate so components are checked before they install."
+    }
+  ]
+}
