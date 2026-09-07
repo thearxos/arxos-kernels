@@ -17,7 +17,7 @@ _Manifest updated 2026-09-07._
 | Flavor | Role | Base | Current |
 | --- | --- | --- | --- |
 | `linux-arxos` | default daily driver | Arch (ArxOS tuned) | 7.2.0-2 |
-| `linux-arxos-rt` | real-time (RF, SDR, wireless capture) | Arch (ArxOS tuned) | 7.2.0-1 |
+| `linux-arxos-rt` | real-time (RF, SDR, wireless capture) | Arch (ArxOS tuned) | 7.2.0-2 |
 
 ## What ARXOS adds
 
@@ -33,6 +33,14 @@ Each one is here for a reason, not for a spec sheet:
 
 Newest first. Each entry says what changed against the kernel before it.
 
+### linux-arxos-rt 7.2.0-2  (current)
+
+- **Upstream base:** Linux 7.2.0 (ArxOS realtime build)
+- **Released:** 2026-09
+- **What changed:** Real-time build (PREEMPT_RT) with the same 7.2.0-2 delta as the default flavor: DEATHSTROKE and hardening (memory wiped on free and alloc, hibernation disabled, IMA measured boot, IOMMU strict, kernel lockdown in integrity mode from early boot, restricted dmesg) plus live kernel patching. Bounded, predictable latency for RF, SDR, and wireless capture.
+- **Kernel:** `linux-arxos-rt-7.2.0-2-x86_64.pkg.tar.zst` (154.2 MB, sha256 `4ef820317eae...`)
+- **Headers:** `linux-arxos-rt-headers-7.2.0-2-x86_64.pkg.tar.zst` (43.8 MB, sha256 `be815470db79...`)
+
 ### linux-arxos 7.2.0-2  (current)
 
 - **Upstream base:** Linux 7.2.0 (ArxOS tuned)
@@ -41,7 +49,7 @@ Newest first. Each entry says what changed against the kernel before it.
 - **Kernel:** `linux-arxos-7.2.0-2-x86_64.pkg.tar.zst` (149.7 MB, sha256 `45bb7e593f20...`)
 - **Headers:** `linux-arxos-headers-7.2.0-2-x86_64.pkg.tar.zst` (42.4 MB, sha256 `f4e7deac0d2d...`)
 
-### linux-arxos-rt 7.2.0-1  (current)
+### linux-arxos-rt 7.2.0-1  (retired)
 
 - **Upstream base:** Linux 7.2.0 (ArxOS realtime build)
 - **Released:** 2026-08
