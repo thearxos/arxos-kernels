@@ -31,6 +31,16 @@
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxupd/install.sh",
       "desc": "ArxOS update manifest puller",
       "updated": "2026-09-07"
+    },
+    "arxos-browser": {
+      "type": "core",
+      "current": "8e20b9b6e7f6",
+      "sha256": "d5405f41722bb0904701a70211f27a3c19478e05bad2e8fd912085470324f6c7",
+      "size": 225984,
+      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxos-browser-8e20b9b6e7f6.tar.zst",
+      "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxos-browser/install.sh",
+      "desc": "ArxOS hardened browser defaults + welcome page",
+      "updated": "2026-09-07"
     }
   },
   "updated": "2026-09-07"
