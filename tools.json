@@ -1,0 +1,17 @@
+{
+  "manifest": "arxos-tools/v1",
+  "note": "Public index of ArxOS binary tools. Latest compiled binaries + install.sh live on Cloudflare R2; source stays private. arx reads this to fetch + verify (sha256, fail-closed) from R2.",
+  "tools": {
+    "arxos-greeter": {
+      "type": "tool",
+      "current": "4d149b4300e1",
+      "sha256": "c45ab42ca9cc9ef7cf202556ace8f4d622c160a91ab55c61eb9ea6e2e1db214d",
+      "size": 368894,
+      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxos-greeter-4d149b4300e1.tar.zst",
+      "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxos-greeter/install.sh",
+      "desc": "ArxOS login/lock greeter",
+      "updated": "2026-09-07"
+    }
+  },
+  "updated": "2026-09-07"
+}
