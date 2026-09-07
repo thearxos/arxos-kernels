@@ -10,13 +10,13 @@ Binaries are hosted twice so every kernel stays reachable:
 - **Cloudflare R2** holds the current kernel for fast downloads.
 - **GitHub Releases and archive.org** hold the full history for rollback.
 
-_Manifest updated 2026-08-27._
+_Manifest updated 2026-09-07._
 
 ## Kernels
 
 | Flavor | Role | Base | Current |
 | --- | --- | --- | --- |
-| `linux-arxos` | default daily driver | Arch (ArxOS tuned) | 7.2.0-1 |
+| `linux-arxos` | default daily driver | Arch (ArxOS tuned) | 7.2.0-2 |
 | `linux-arxos-rt` | real-time (RF, SDR, wireless capture) | Arch (ArxOS tuned) | 7.2.0-1 |
 
 ## What ARXOS adds
@@ -33,6 +33,14 @@ Each one is here for a reason, not for a spec sheet:
 
 Newest first. Each entry says what changed against the kernel before it.
 
+### linux-arxos 7.2.0-2  (current)
+
+- **Upstream base:** Linux 7.2.0 (ArxOS tuned)
+- **Released:** 2026-09
+- **What changed:** Adds the DEATHSTROKE and hardening delta: memory wiped on free and on alloc, hibernation disabled so no plaintext key lands in swap, IMA measured boot, IOMMU enforced in strict mode, kernel lockdown in integrity mode from early boot, restricted dmesg, and live kernel patching. Rebased on the latest 7.2.0 base with the full ArxOS tune set.
+- **Kernel:** `linux-arxos-7.2.0-2-x86_64.pkg.tar.zst` (149.7 MB, sha256 `45bb7e593f20...`)
+- **Headers:** `linux-arxos-headers-7.2.0-2-x86_64.pkg.tar.zst` (42.4 MB, sha256 `f4e7deac0d2d...`)
+
 ### linux-arxos-rt 7.2.0-1  (current)
 
 - **Upstream base:** Linux 7.2.0 (ArxOS realtime build)
@@ -41,7 +49,7 @@ Newest first. Each entry says what changed against the kernel before it.
 - **Kernel:** `linux-arxos-rt-7.2.0-1-x86_64.pkg.tar.zst` (147.5 MB, sha256 `f6ce34664c0b...`)
 - **Headers:** `linux-arxos-rt-headers-7.2.0-1-x86_64.pkg.tar.zst` (37.5 MB, sha256 `de8cc8546ccf...`)
 
-### linux-arxos 7.2.0-1  (current)
+### linux-arxos 7.2.0-1  (retired)
 
 - **Upstream base:** Linux 7.2.0
 - **Released:** 2026-08
@@ -70,9 +78,3 @@ arxos-kernel install linux-arxos 7.1.3-1   # roll back to a specific version
 The current kernel downloads from R2; older versions come from the full history.
 Every download is checked against the sha256 in this manifest before it installs.
 
-
----
-
-<div align="center">
-<sub><b>arxos-kernels</b> is part of the <b>ArxOS</b> project, built by <b>Stingray Labs</b>.</sub>
-</div>

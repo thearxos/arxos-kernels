@@ -1,12 +1,12 @@
 {
   "manifest": "arxos-kernels/v1",
-  "updated": "2026-08-27",
+  "updated": "2026-09-07",
   "note": "Public history of every ARXOS kernel. Text only: the patch code and config stay private. Binaries live on Cloudflare R2 (current, fast) and archive.org / GitHub Releases (full history, rollback).",
   "flavors": {
     "linux-arxos": {
       "role": "default daily driver",
       "base": "Arch (ArxOS tuned)",
-      "current": "7.2.0-1"
+      "current": "7.2.0-2"
     },
     "linux-arxos-rt": {
       "role": "real-time (RF, SDR, wireless capture)",
@@ -33,6 +33,31 @@
     }
   ],
   "kernels": [
+    {
+      "flavor": "linux-arxos",
+      "version": "7.2.0-2",
+      "upstream": "Linux 7.2.0 (ArxOS tuned)",
+      "date": "2026-09",
+      "status": "current",
+      "changes": "Adds the DEATHSTROKE and hardening delta: memory wiped on free and on alloc, hibernation disabled so no plaintext key lands in swap, IMA measured boot, IOMMU enforced in strict mode, kernel lockdown in integrity mode from early boot, restricted dmesg, and live kernel patching. Rebased on the latest 7.2.0 base with the full ArxOS tune set.",
+      "artifacts": {
+        "kernel": {
+          "file": "linux-arxos-7.2.0-2-x86_64.pkg.tar.zst",
+          "size": 157008509,
+          "sha256": "45bb7e593f20a83997305118c32a04c4eb0494297e92a951d5b1268207fd3ac9"
+        },
+        "headers": {
+          "file": "linux-arxos-headers-7.2.0-2-x86_64.pkg.tar.zst",
+          "size": 44469177,
+          "sha256": "f4e7deac0d2d2d28fce84cfaff86f094555568ca484f5353631c0197ba63cd74"
+        }
+      },
+      "urls": {
+        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
+        "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-7.2.0-2/",
+        "archive_org": null
+      }
+    },
     {
       "flavor": "linux-arxos-rt",
       "version": "7.2.0-1",
@@ -63,7 +88,7 @@
       "version": "7.2.0-1",
       "upstream": "Linux 7.2.0",
       "date": "2026-08",
-      "status": "current",
+      "status": "retired",
       "changes": "Rebased onto the newer upstream (Linux 7.2.0). Carries the full ARXOS tune set unchanged: live patching, kernel-level anonymity primitives, low-level device access, and the tuned performance base.",
       "artifacts": {
         "kernel": {
@@ -78,7 +103,7 @@
         }
       },
       "urls": {
-        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
+        "r2": null,
         "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-7.2.0-1/",
         "archive_org": null
       }
