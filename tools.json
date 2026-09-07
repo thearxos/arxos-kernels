@@ -44,10 +44,10 @@
     },
     "arxctl": {
       "type": "core",
-      "current": "bebd6837cff2",
-      "sha256": "3776dd54689c856ce07469d040d8af4de452765bbf5251ba085169251fa1b0db",
-      "size": 4175415,
-      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxctl-bebd6837cff2.tar.zst",
+      "current": "c91b05c9c379",
+      "sha256": "d502e218e193281729f254698958379fed61b30d6f47c25efce11feba2d0802a",
+      "size": 4176218,
+      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxctl-c91b05c9c379.tar.zst",
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxctl/install.sh",
       "desc": "ArxOS Control Center (native Rust/Tauri)",
       "updated": "2026-09-07"
