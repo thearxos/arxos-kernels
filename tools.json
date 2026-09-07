@@ -61,6 +61,16 @@
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/anonkit/install.sh",
       "desc": "ArxOS AnonKit (fail-closed Tor anonymity daemon)",
       "updated": "2026-09-07"
+    },
+    "deathstroke": {
+      "type": "tool",
+      "current": "984fedba43a4",
+      "sha256": "ad214e7d2216b60f70c616860fc7495fd9d7afb96df237dfe5c1ba23b295b26d",
+      "size": 429631,
+      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/deathstroke-984fedba43a4.tar.zst",
+      "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/deathstroke/install.sh",
+      "desc": "DEATHSTROKE emergency anti-forensics (duress crypto-erase)",
+      "updated": "2026-09-07"
     }
   },
   "updated": "2026-09-07"
