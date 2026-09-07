@@ -11,6 +11,16 @@
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxos-greeter/install.sh",
       "desc": "ArxOS login/lock greeter",
       "updated": "2026-09-07"
+    },
+    "arx": {
+      "type": "core",
+      "current": "fc4e9ef94f1a",
+      "sha256": "3e85af7788a7bb6952799b5fe3a11d9e38e44a52a9f7a5d50cd9d879750171fe",
+      "size": 1601424,
+      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arx-fc4e9ef94f1a.tar.zst",
+      "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arx/install.sh",
+      "desc": "ArxOS package manager (pure-Rust arx-core)",
+      "updated": "2026-09-07"
     }
   },
   "updated": "2026-09-07"
