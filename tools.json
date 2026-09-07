@@ -21,6 +21,16 @@
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arx/install.sh",
       "desc": "ArxOS package manager (pure-Rust arx-core)",
       "updated": "2026-09-07"
+    },
+    "arxupd": {
+      "type": "core",
+      "current": "a91d0082162d",
+      "sha256": "834d0ca8febe0a417d65bd5071c6f218ff06755497888be771e444ffc8e891c3",
+      "size": 2643,
+      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxupd-a91d0082162d.tar.zst",
+      "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxupd/install.sh",
+      "desc": "ArxOS update manifest puller",
+      "updated": "2026-09-07"
     }
   },
   "updated": "2026-09-07"
