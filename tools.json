@@ -14,10 +14,10 @@
     },
     "arx": {
       "type": "core",
-      "current": "4052f15e6d14",
-      "sha256": "fb055ec769413301b1a7c81678b7e0a00ae700f2f4ce9010aeadbf72a9422bba",
-      "size": 1600462,
-      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arx-4052f15e6d14.tar.zst",
+      "current": "6222d34f3a09",
+      "sha256": "fdf0f42b1691c2870df39fa28cdeb9b070fee541a0d2569e52330525d0eba98a",
+      "size": 1606414,
+      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arx-6222d34f3a09.tar.zst",
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arx/install.sh",
       "desc": "ArxOS package manager (pure-Rust arx-core)",
       "updated": "2026-09-07"
