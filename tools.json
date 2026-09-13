@@ -64,14 +64,14 @@
     },
     "deathstroke": {
       "type": "tool",
-      "current": "4cf198d3b999",
-      "sha256": "3d3a41895da3429774677366aaff1d351fd598fb7c53e1c71696dc85a52026d1",
-      "size": 430950,
-      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/deathstroke-4cf198d3b999.tar.zst",
+      "current": "980438dfa424f8a3a7774684e1ca96b70b6e12c9210b540c59c8c797d126a03c",
+      "sha256": "980438dfa424f8a3a7774684e1ca96b70b6e12c9210b540c59c8c797d126a03c",
+      "size": 558103,
+      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/deathstroke/980438dfa424f8a3a7774684e1ca96b70b6e12c9210b540c59c8c797d126a03c/980438dfa424f8a3a7774684e1ca96b70b6e12c9210b540c59c8c797d126a03c.tar.zst",
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/deathstroke/install.sh",
-      "desc": "DEATHSTROKE emergency anti-forensics (duress crypto-erase)",
-      "updated": "2026-09-07"
+      "desc": "",
+      "updated": "2026-09-13"
     }
   },
-  "updated": "2026-09-07"
+  "updated": "2026-09-13"
 }
