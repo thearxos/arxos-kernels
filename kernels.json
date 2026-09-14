@@ -1,12 +1,12 @@
 {
   "manifest": "arxos-kernels/v1",
-  "updated": "2026-09-07",
+  "updated": "2026-09-14",
   "note": "Public history of every ARXOS kernel. Text only: the patch code and config stay private. Binaries live on Cloudflare R2 (current, fast) and archive.org / GitHub Releases (full history, rollback).",
   "flavors": {
     "linux-arxos": {
       "role": "default daily driver",
       "base": "Arch (ArxOS tuned)",
-      "current": "7.2.0-2"
+      "current": "7.2.5-1"
     },
     "linux-arxos-rt": {
       "role": "real-time (RF, SDR, wireless capture)",
@@ -33,6 +33,31 @@
     }
   ],
   "kernels": [
+    {
+      "flavor": "linux-arxos",
+      "version": "7.2.5-1",
+      "upstream": "Linux 7.2.5",
+      "date": "2026-09",
+      "status": "current",
+      "changes": "Rebased onto Linux 7.2.5 with the full ARXOS performance and hardening set carried forward: latest upstream security fixes, tuned scheduler, full preemption, 1000 Hz, ThinLTO, plus lockdown, IMA, IOMMU-strict, init-on-alloc/free and live patching.",
+      "artifacts": {
+        "kernel": {
+          "file": "linux-arxos-7.2.5-1-x86_64.pkg.tar.zst",
+          "size": 156781595,
+          "sha256": "cb33dd21c5bd5196983cfe551ca9b75dc2def9511d14f4acd57271ebae70e827"
+        },
+        "headers": {
+          "file": "linux-arxos-headers-7.2.5-1-x86_64.pkg.tar.zst",
+          "size": 44483517,
+          "sha256": "3126622fd8d53d017d6bf32a75c7f3bfce6aaf353ee089a0454e3abc3e1f2137"
+        }
+      },
+      "urls": {
+        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
+        "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-7.2.5-1/",
+        "archive_org": null
+      }
+    },
     {
       "flavor": "linux-arxos-rt",
       "version": "7.2.0-2",
@@ -63,7 +88,7 @@
       "version": "7.2.0-2",
       "upstream": "Linux 7.2.0 (ArxOS tuned)",
       "date": "2026-09",
-      "status": "current",
+      "status": "retired",
       "changes": "Adds the DEATHSTROKE and hardening delta: memory wiped on free and on alloc, hibernation disabled so no plaintext key lands in swap, IMA measured boot, IOMMU enforced in strict mode, kernel lockdown in integrity mode from early boot, restricted dmesg, and live kernel patching. Rebased on the latest 7.2.0 base with the full ArxOS tune set.",
       "artifacts": {
         "kernel": {
@@ -78,7 +103,7 @@
         }
       },
       "urls": {
-        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
+        "r2": null,
         "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-7.2.0-2/",
         "archive_org": null
       }

@@ -10,13 +10,13 @@ Binaries are hosted twice so every kernel stays reachable:
 - **Cloudflare R2** holds the current kernel for fast downloads.
 - **GitHub Releases and archive.org** hold the full history for rollback.
 
-_Manifest updated 2026-09-07._
+_Manifest updated 2026-09-14._
 
 ## Kernels
 
 | Flavor | Role | Base | Current |
 | --- | --- | --- | --- |
-| `linux-arxos` | default daily driver | Arch (ArxOS tuned) | 7.2.0-2 |
+| `linux-arxos` | default daily driver | Arch (ArxOS tuned) | 7.2.5-1 |
 | `linux-arxos-rt` | real-time (RF, SDR, wireless capture) | Arch (ArxOS tuned) | 7.2.0-2 |
 
 ## What ARXOS adds
@@ -33,6 +33,14 @@ Each one is here for a reason, not for a spec sheet:
 
 Newest first. Each entry says what changed against the kernel before it.
 
+### linux-arxos 7.2.5-1  (current)
+
+- **Upstream base:** Linux 7.2.5
+- **Released:** 2026-09
+- **What changed:** Rebased onto Linux 7.2.5 with the full ARXOS performance and hardening set carried forward: latest upstream security fixes, tuned scheduler, full preemption, 1000 Hz, ThinLTO, plus lockdown, IMA, IOMMU-strict, init-on-alloc/free and live patching.
+- **Kernel:** `linux-arxos-7.2.5-1-x86_64.pkg.tar.zst` (149.5 MB, sha256 `cb33dd21c5bd...`)
+- **Headers:** `linux-arxos-headers-7.2.5-1-x86_64.pkg.tar.zst` (42.4 MB, sha256 `3126622fd8d5...`)
+
 ### linux-arxos-rt 7.2.0-2  (current)
 
 - **Upstream base:** Linux 7.2.0 (ArxOS realtime build)
@@ -41,7 +49,7 @@ Newest first. Each entry says what changed against the kernel before it.
 - **Kernel:** `linux-arxos-rt-7.2.0-2-x86_64.pkg.tar.zst` (154.2 MB, sha256 `4ef820317eae...`)
 - **Headers:** `linux-arxos-rt-headers-7.2.0-2-x86_64.pkg.tar.zst` (43.8 MB, sha256 `be815470db79...`)
 
-### linux-arxos 7.2.0-2  (current)
+### linux-arxos 7.2.0-2  (retired)
 
 - **Upstream base:** Linux 7.2.0 (ArxOS tuned)
 - **Released:** 2026-09
