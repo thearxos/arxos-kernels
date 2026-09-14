@@ -11,7 +11,7 @@
     "linux-arxos-rt": {
       "role": "real-time (RF, SDR, wireless capture)",
       "base": "Arch (ArxOS tuned)",
-      "current": "7.2.0-2"
+      "current": "7.2.5-1"
     }
   },
   "tunes": [
@@ -33,6 +33,31 @@
     }
   ],
   "kernels": [
+    {
+      "flavor": "linux-arxos-rt",
+      "version": "7.2.5-1",
+      "upstream": "Linux 7.2.5",
+      "date": "2026-09",
+      "status": "current",
+      "changes": "Real-time (PREEMPT_RT + BORE) rebased onto Linux 7.2.5 with the full ARXOS hardening set: latest upstream security fixes, forced-threaded IRQs, RCU boost, 1000 Hz, plus lockdown, IMA, IOMMU-strict, init-on-alloc/free and live patching. No LTO (RT and LTO do not mix).",
+      "artifacts": {
+        "kernel": {
+          "file": "linux-arxos-rt-7.2.5-1-x86_64.pkg.tar.zst",
+          "size": 161557258,
+          "sha256": "d8c1898c86aa6c2c835c06a2b7b65b25d395a3f824e3ff0f317a9fe3d549c666"
+        },
+        "headers": {
+          "file": "linux-arxos-rt-headers-7.2.5-1-x86_64.pkg.tar.zst",
+          "size": 45969267,
+          "sha256": "028d94e7be6ff6980304c36f029c3b60f5cd74d9634270aa6ef990cc847b569e"
+        }
+      },
+      "urls": {
+        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
+        "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-rt-7.2.5-1/",
+        "archive_org": null
+      }
+    },
     {
       "flavor": "linux-arxos",
       "version": "7.2.5-1",
@@ -63,7 +88,7 @@
       "version": "7.2.0-2",
       "upstream": "Linux 7.2.0 (ArxOS realtime build)",
       "date": "2026-09",
-      "status": "current",
+      "status": "retired",
       "changes": "Real-time build (PREEMPT_RT) with the same 7.2.0-2 delta as the default flavor: DEATHSTROKE and hardening (memory wiped on free and alloc, hibernation disabled, IMA measured boot, IOMMU strict, kernel lockdown in integrity mode from early boot, restricted dmesg) plus live kernel patching. Bounded, predictable latency for RF, SDR, and wireless capture.",
       "artifacts": {
         "kernel": {
@@ -78,7 +103,7 @@
         }
       },
       "urls": {
-        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
+        "r2": null,
         "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-rt-7.2.0-2/",
         "archive_org": null
       }
