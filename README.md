@@ -1,16 +1,18 @@
 # arxos-kernels
 
-The public history of every ARXOS kernel. This repository is text only. The
-kernel patch code and the build config stay private; what you see here is the
-release history, the plain-English list of what each kernel adds, and where to
-download it.
+The public history of every ARXOS **kernel** and **ISO image**. This repository
+is text only: the kernel patch code and the build config stay private. What you
+see here is the release history, the plain-English list of what each build adds,
+the SHA-256 of every file, and where to download it. It also holds the automation
+that mirrors every release to archive.org.
 
-Binaries are hosted twice so every kernel stays reachable:
+Binaries are hosted in more than one place so nothing ever disappears:
 
-- **Cloudflare R2** holds the current kernel for fast downloads.
-- **GitHub Releases and archive.org** hold the full history for rollback.
+- **Cloudflare R2** — the current kernel and ISO, for fast downloads.
+- **GitHub Releases** — every kernel version (ISOs are too large for Releases).
+- **archive.org** — a durable mirror of every kernel and ISO, for the long haul.
 
-_Manifest updated 2026-09-14._
+_Manifests updated 2026-09-14._
 
 ## Kernels
 
@@ -29,7 +31,7 @@ Each one is here for a reason, not for a spec sheet:
 - **Low-level device access.** Fast, direct device input and output is enabled for the ARXOS device toolkit, including raw USB access and a high-performance I/O path. This is what lets droidB talk to hardware quickly and reliably.
 - **Performance base.** ARXOS keeps a tuned performance profile: a responsive desktop scheduler, faster network throughput, a high timer rate, full preemption for low latency, a modern CPU baseline, and better memory behaviour under load. The result is a system that feels quick and stays quick.
 
-## History
+## Kernel history
 
 Newest first. Each entry says what changed against the kernel before it.
 
@@ -40,6 +42,7 @@ Newest first. Each entry says what changed against the kernel before it.
 - **What changed:** Real-time (PREEMPT_RT + BORE) rebased onto Linux 7.2.5 with the full ARXOS hardening set: latest upstream security fixes, forced-threaded IRQs, RCU boost, 1000 Hz, plus lockdown, IMA, IOMMU-strict, init-on-alloc/free and live patching. No LTO (RT and LTO do not mix).
 - **Kernel:** `linux-arxos-rt-7.2.5-1-x86_64.pkg.tar.zst` (154.1 MB, sha256 `d8c1898c86aa...`)
 - **Headers:** `linux-arxos-rt-headers-7.2.5-1-x86_64.pkg.tar.zst` (43.8 MB, sha256 `028d94e7be6f...`)
+- **Mirror:** archived on archive.org
 
 ### linux-arxos 7.2.5-1  (current)
 
@@ -88,6 +91,22 @@ Newest first. Each entry says what changed against the kernel before it.
 - **What changed:** First kernel of this ARXOS line. Established the ARXOS tune set over the tuned base. Superseded by 7.2.0-1.
 - **Kernel:** `linux-arxos-7.1.3-1-x86_64.pkg.tar.zst` (archived; hash restored when re-published)
 
+## Images (ISOs)
+
+| Edition | Version | Released | Status |
+| --- | --- | --- | --- |
+| `slim` | 0.0.1 | 2026-09 | current |
+
+Newest first. ISOs live on R2 (primary) and archive.org (mirror); they are
+too large for GitHub Releases.
+
+### ArxOS 0.0.1 (slim)  (current)
+
+- **Base:** Arch (ArxOS tuned)
+- **Released:** 2026-09
+- **What changed:** First public ArxOS release. Slim image: a lean base with the ArxOS toolkit built in; add the security arsenal on demand with arx after install. linux-arxos 7.2.5-1, zram baked in, DEATHSTROKE installed inert, install-gate verified on real hardware and in VMs.
+- **Image:** `arxos-0.0.1.iso` (3.93 GB; sha256 recorded on the next mirror run)
+
 ## Getting a kernel
 
 On ARXOS, use the Control Center Kernels panel, or the command line:
@@ -101,4 +120,28 @@ arxos-kernel install linux-arxos 7.1.3-1   # roll back to a specific version
 
 The current kernel downloads from R2; older versions come from the full history.
 Every download is checked against the sha256 in this manifest before it installs.
+
+## Mirroring and automation
+
+Every release is copied to archive.org as a durable second home, entirely in the
+cloud — nothing depends on a maintainer's connection or upload speed.
+
+- **`tools/mirror-to-archive.py`** downloads each release from its primary source
+  (GitHub Releases for kernels, R2 for ISOs), verifies or computes the SHA-256,
+  uploads it to a per-release archive.org item, and writes the archive.org URL
+  back into the manifest. It is idempotent: anything already mirrored is skipped,
+  so re-running only fills the gaps.
+- **`.github/workflows/mirror-archive.yml`** runs that script on a GitHub runner
+  (manual dispatch or on schedule) using the `IA_ACCESS_KEY` / `IA_SECRET_KEY`
+  repository secrets.
+- **`cron-worker/`** is a Cloudflare Worker that triggers the workflow on a cron,
+  so the mirror stays in sync automatically. See `cron-worker/README.md`.
+
+Publishing a new release updates the manifest, which the mirror then picks up:
+
+- **Kernel:** `update-manifest.py` (run by the kernel publish step).
+- **ISO:** upload the image to R2, then `update-isos.py --version X --file arxos-X.iso --changes "..."`.
+
+A live, always-current view of every release is at
+**<https://arxos.uk/releases.html>**.
 
