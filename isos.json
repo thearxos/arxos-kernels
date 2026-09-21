@@ -1,0 +1,28 @@
+{
+  "manifest": "arxos-isos/v1",
+  "updated": "2026-09-21",
+  "note": "Public history of every ARXOS ISO image. Binaries live on Cloudflare R2 (current, fast) and archive.org (durable mirror). ISOs are too large for GitHub Releases, so R2 is the primary and archive.org is the backup.",
+  "images": [
+    {
+      "edition": "slim",
+      "version": "0.0.1",
+      "title": "ArxOS 0.0.1 (slim)",
+      "upstream": "Arch (ArxOS tuned)",
+      "date": "2026-09",
+      "status": "current",
+      "changes": "First public ArxOS release. Slim image: a lean base with the ArxOS toolkit built in; add the security arsenal on demand with arx after install. linux-arxos 7.2.5-1, zram baked in, DEATHSTROKE installed inert, install-gate verified on real hardware and in VMs.",
+      "artifacts": {
+        "iso": {
+          "file": "arxos-0.0.1.iso",
+          "size": 4223172608,
+          "sha256": null
+        }
+      },
+      "urls": {
+        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/",
+        "github": null,
+        "archive_org": null
+      }
+    }
+  ]
+}

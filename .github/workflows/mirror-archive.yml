@@ -1,0 +1,74 @@
+name: Mirror releases to archive.org
+
+# Cloud-to-cloud durable mirror: pulls each release binary from GitHub Releases
+# (kernels) or Cloudflare R2 (ISOs) on a GitHub runner, uploads it to archive.org,
+# and commits the resulting archive.org URLs back into the manifests. Nothing
+# touches a local machine, so it does not depend on the maintainer's connection.
+#
+# Requires two repo secrets (Settings > Secrets and variables > Actions):
+#   IA_ACCESS_KEY / IA_SECRET_KEY  -- archive.org S3 keys (archive.org/account/s3.php)
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "What to mirror"
+        type: choice
+        options: [all, kernels, isos]
+        default: all
+      dry_run:
+        description: "Plan only (no download/upload)"
+        type: boolean
+        default: false
+      limit:
+        description: "Max releases this run (0 = no limit)"
+        default: "0"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mirror-archive
+  cancel-in-progress: false
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install internetarchive
+        run: pip install --quiet internetarchive
+
+      - name: Prepare large temp space (ISO is multi-GB)
+        run: |
+          sudo mkdir -p /mnt/mirror-tmp
+          sudo chmod 777 /mnt/mirror-tmp
+          echo "TMPDIR=/mnt/mirror-tmp" >> "$GITHUB_ENV"
+
+      - name: Mirror to archive.org
+        env:
+          IA_ACCESS_KEY: ${{ secrets.IA_ACCESS_KEY }}
+          IA_SECRET_KEY: ${{ secrets.IA_SECRET_KEY }}
+        run: |
+          python tools/mirror-to-archive.py \
+            --target "${{ inputs.target }}" \
+            --limit "${{ inputs.limit }}" \
+            ${{ inputs.dry_run == true && '--dry-run' || '' }}
+
+      - name: Commit manifest updates
+        if: ${{ inputs.dry_run != true }}
+        run: |
+          git config user.name "arxos-mirror[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kernels.json isos.json 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No manifest changes to commit."
+          else
+            git commit -m "mirror: record archive.org URLs [skip ci]"
+            git push
+          fi
