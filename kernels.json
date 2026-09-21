@@ -55,8 +55,9 @@
       "urls": {
         "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
         "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-rt-7.2.5-1/",
-        "archive_org": null
-      }
+        "archive_org": "https://archive.org/download/arxos-linux-arxos-rt-7.2.5-1/"
+      },
+      "mirrored": "2026-09-21"
     },
     {
       "flavor": "linux-arxos",
