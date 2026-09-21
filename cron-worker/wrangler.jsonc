@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "arxos-mirror-cron",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-06-21",
+  // Weekly safety-net: Sundays 05:10 UTC. Change to "10 5 * * *" for nightly.
+  "triggers": { "crons": ["10 5 * * 0"] },
+  "observability": { "enabled": true },
+  "vars": {
+    "REPO": "thearxos/arxos-kernels",
+    "WORKFLOW": "mirror-archive.yml",
+    "REF": "main",
+    "TARGET": "all"
+  }
+}
