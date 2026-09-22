@@ -1,6 +1,6 @@
 {
   "manifest": "arxos-isos/v1",
-  "updated": "2026-09-21",
+  "updated": "2026-09-22",
   "note": "Public history of every ARXOS ISO image. Binaries live on Cloudflare R2 (current, fast) and archive.org (durable mirror). ISOs are too large for GitHub Releases, so R2 is the primary and archive.org is the backup.",
   "images": [
     {
@@ -15,14 +15,15 @@
         "iso": {
           "file": "arxos-0.0.1.iso",
           "size": 4223172608,
-          "sha256": null
+          "sha256": "18d87568b4e2cf4d2e83bb0052c93a5d76b12708bd942e86029ea612c1f2d44d"
         }
       },
       "urls": {
         "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/",
         "github": null,
-        "archive_org": null
-      }
+        "archive_org": "https://archive.org/download/arxos-0.0.1-slim/"
+      },
+      "mirrored": "2026-09-22"
     }
   ]
 }

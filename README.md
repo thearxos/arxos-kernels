@@ -12,7 +12,7 @@ Binaries are hosted in more than one place so nothing ever disappears:
 - **GitHub Releases** — every kernel version (ISOs are too large for Releases).
 - **archive.org** — a durable mirror of every kernel and ISO, for the long haul.
 
-_Manifests updated 2026-09-14._
+_Manifests updated 2026-09-22._
 
 ## Kernels
 
@@ -51,6 +51,7 @@ Newest first. Each entry says what changed against the kernel before it.
 - **What changed:** Rebased onto Linux 7.2.5 with the full ARXOS performance and hardening set carried forward: latest upstream security fixes, tuned scheduler, full preemption, 1000 Hz, ThinLTO, plus lockdown, IMA, IOMMU-strict, init-on-alloc/free and live patching.
 - **Kernel:** `linux-arxos-7.2.5-1-x86_64.pkg.tar.zst` (149.5 MB, sha256 `cb33dd21c5bd...`)
 - **Headers:** `linux-arxos-headers-7.2.5-1-x86_64.pkg.tar.zst` (42.4 MB, sha256 `3126622fd8d5...`)
+- **Mirror:** archived on archive.org
 
 ### linux-arxos-rt 7.2.0-2  (retired)
 
@@ -59,6 +60,7 @@ Newest first. Each entry says what changed against the kernel before it.
 - **What changed:** Real-time build (PREEMPT_RT) with the same 7.2.0-2 delta as the default flavor: DEATHSTROKE and hardening (memory wiped on free and alloc, hibernation disabled, IMA measured boot, IOMMU strict, kernel lockdown in integrity mode from early boot, restricted dmesg) plus live kernel patching. Bounded, predictable latency for RF, SDR, and wireless capture.
 - **Kernel:** `linux-arxos-rt-7.2.0-2-x86_64.pkg.tar.zst` (154.2 MB, sha256 `4ef820317eae...`)
 - **Headers:** `linux-arxos-rt-headers-7.2.0-2-x86_64.pkg.tar.zst` (43.8 MB, sha256 `be815470db79...`)
+- **Mirror:** archived on archive.org
 
 ### linux-arxos 7.2.0-2  (retired)
 
@@ -67,6 +69,7 @@ Newest first. Each entry says what changed against the kernel before it.
 - **What changed:** Adds the DEATHSTROKE and hardening delta: memory wiped on free and on alloc, hibernation disabled so no plaintext key lands in swap, IMA measured boot, IOMMU enforced in strict mode, kernel lockdown in integrity mode from early boot, restricted dmesg, and live kernel patching. Rebased on the latest 7.2.0 base with the full ArxOS tune set.
 - **Kernel:** `linux-arxos-7.2.0-2-x86_64.pkg.tar.zst` (149.7 MB, sha256 `45bb7e593f20...`)
 - **Headers:** `linux-arxos-headers-7.2.0-2-x86_64.pkg.tar.zst` (42.4 MB, sha256 `f4e7deac0d2d...`)
+- **Mirror:** archived on archive.org
 
 ### linux-arxos-rt 7.2.0-1  (retired)
 
@@ -75,6 +78,7 @@ Newest first. Each entry says what changed against the kernel before it.
 - **What changed:** Real-time flavor: PREEMPT_RT + BORE. Same ArxOS tuning and the same offensive/defensive tool support as linux-arxos, but with hard real-time preemption (bounded worst-case latency, threaded IRQs) for RF, SDR, and wireless capture where timing must be exact. Trades a little raw throughput for predictable latency; linux-arxos stays the default daily driver.
 - **Kernel:** `linux-arxos-rt-7.2.0-1-x86_64.pkg.tar.zst` (147.5 MB, sha256 `f6ce34664c0b...`)
 - **Headers:** `linux-arxos-rt-headers-7.2.0-1-x86_64.pkg.tar.zst` (37.5 MB, sha256 `de8cc8546ccf...`)
+- **Mirror:** archived on archive.org
 
 ### linux-arxos 7.2.0-1  (retired)
 
@@ -83,6 +87,7 @@ Newest first. Each entry says what changed against the kernel before it.
 - **What changed:** Rebased onto the newer upstream (Linux 7.2.0). Carries the full ARXOS tune set unchanged: live patching, kernel-level anonymity primitives, low-level device access, and the tuned performance base.
 - **Kernel:** `linux-arxos-7.2.0-1-x86_64.pkg.tar.zst` (149.5 MB, sha256 `361410e6973e...`)
 - **Headers:** `linux-arxos-headers-7.2.0-1-x86_64.pkg.tar.zst` (37.7 MB, sha256 `40b97f609efe...`)
+- **Mirror:** archived on archive.org
 
 ### linux-arxos 7.1.3-1  (retired)
 
@@ -90,6 +95,7 @@ Newest first. Each entry says what changed against the kernel before it.
 - **Released:** 2026-07
 - **What changed:** First kernel of this ARXOS line. Established the ARXOS tune set over the tuned base. Superseded by 7.2.0-1.
 - **Kernel:** `linux-arxos-7.1.3-1-x86_64.pkg.tar.zst` (archived; hash restored when re-published)
+- **Mirror:** archived on archive.org
 
 ## Images (ISOs)
 
@@ -105,7 +111,8 @@ too large for GitHub Releases.
 - **Base:** Arch (ArxOS tuned)
 - **Released:** 2026-09
 - **What changed:** First public ArxOS release. Slim image: a lean base with the ArxOS toolkit built in; add the security arsenal on demand with arx after install. linux-arxos 7.2.5-1, zram baked in, DEATHSTROKE installed inert, install-gate verified on real hardware and in VMs.
-- **Image:** `arxos-0.0.1.iso` (3.93 GB; sha256 recorded on the next mirror run)
+- **Image:** `arxos-0.0.1.iso` (3.93 GB, sha256 `18d87568b4e2...`)
+- **Mirror:** archived on archive.org
 
 ## Getting a kernel
 

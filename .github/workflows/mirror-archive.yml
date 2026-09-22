@@ -70,5 +70,16 @@ jobs:
             echo "No manifest changes to commit."
           else
             git commit -m "mirror: record archive.org URLs [skip ci]"
-            git push
+            # A scan can run for an hour; anything else landing on main in that window
+            # would otherwise reject this push and silently lose the record of an upload
+            # that already succeeded. Rebase and retry instead of failing.
+            for attempt in 1 2 3 4 5; do
+              if git push; then
+                echo "pushed on attempt $attempt"; exit 0
+              fi
+              echo "push rejected, rebasing onto latest main (attempt $attempt)"
+              git pull --rebase --autostash origin main || exit 1
+              sleep 3
+            done
+            echo "could not push the manifest after 5 attempts"; exit 1
           fi
