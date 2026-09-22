@@ -71,7 +71,17 @@
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/deathstroke/install.sh",
       "desc": "",
       "updated": "2026-09-13"
+    },
+    "droidB": {
+      "type": "tool",
+      "current": "0.4.1",
+      "sha256": "05080d11e981f1d65e2e1dfd0bb2005417a41d5627b1314ebf42f1ff7a7ff131",
+      "size": 102440541,
+      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/droidB/0.4.1/05080d11e981f1d65e2e1dfd0bb2005417a41d5627b1314ebf42f1ff7a7ff131.tar.zst",
+      "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/droidB/install.sh",
+      "desc": "ArxOS Android and iPhone toolkit: spyware scan, fleet, deep clean, flashing",
+      "updated": "2026-09-22"
     }
   },
-  "updated": "2026-09-21"
+  "updated": "2026-09-22"
 }
