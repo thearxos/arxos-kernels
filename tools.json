@@ -14,13 +14,13 @@
     },
     "arx": {
       "type": "core",
-      "current": "0.1.1-c31c456",
-      "sha256": "63c0458d3a51d41b65fd1daf794ba36ff46046347471774fab54a58083eb7be7",
-      "size": 1788852,
-      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arx/0.1.1-c31c456/63c0458d3a51d41b65fd1daf794ba36ff46046347471774fab54a58083eb7be7.tar.zst",
+      "current": "0.1.1-f9af47f",
+      "sha256": "51d9de47487aad4061e8f27e00255e7915ab81c396172c947fa8ff05e89e413a",
+      "size": 1788948,
+      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arx/0.1.1-f9af47f/51d9de47487aad4061e8f27e00255e7915ab81c396172c947fa8ff05e89e413a.tar.zst",
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arx/install.sh",
-      "desc": "Native package manager + system orchestrator (recovers from a stale pacman lock during tool updates)",
-      "updated": "2026-09-21"
+      "desc": "Native package manager + system orchestrator (self-update now installs the new version)",
+      "updated": "2026-09-22"
     },
     "arxupd": {
       "type": "core",
