@@ -4,13 +4,13 @@
   "tools": {
     "arxos-greeter": {
       "type": "tool",
-      "current": "4d149b4300e1",
-      "sha256": "c45ab42ca9cc9ef7cf202556ace8f4d622c160a91ab55c61eb9ea6e2e1db214d",
-      "size": 368894,
-      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxos-greeter-4d149b4300e1.tar.zst",
+      "current": "61df1710227a",
+      "sha256": "61df1710227aee405663ada5dbbdf1e5264f2916b1fb105e2f52d706bad9a5ac",
+      "size": 2376327,
+      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxos-greeter/61df1710227a/61df1710227aee405663ada5dbbdf1e5264f2916b1fb105e2f52d706bad9a5ac.tar.zst",
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxos-greeter/install.sh",
       "desc": "ArxOS login/lock greeter",
-      "updated": "2026-09-07"
+      "updated": "2026-09-24"
     },
     "arx": {
       "type": "core",
@@ -103,5 +103,5 @@
       "updated": "2026-09-23"
     }
   },
-  "updated": "2026-09-23"
+  "updated": "2026-09-24"
 }
