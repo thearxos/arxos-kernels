@@ -81,7 +81,17 @@
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/droidB/install.sh",
       "desc": "ArxOS Android and iPhone toolkit: spyware scan, fleet, deep clean, flashing",
       "updated": "2026-09-22"
+    },
+    "arxguard": {
+      "type": "tool",
+      "current": "8fb8348ac6fc",
+      "sha256": "0dca547796d22ac7057eff3e8cd1aca3e96c5202a6d74bb16c1436959943f010",
+      "size": 21640,
+      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxguard/8fb8348ac6fc/0dca547796d22ac7057eff3e8cd1aca3e96c5202a6d74bb16c1436959943f010.tar.zst",
+      "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxguard/install.sh",
+      "desc": "",
+      "updated": "2026-09-23"
     }
   },
-  "updated": "2026-09-22"
+  "updated": "2026-09-23"
 }
