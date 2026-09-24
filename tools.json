@@ -4,12 +4,12 @@
   "tools": {
     "arxos-greeter": {
       "type": "tool",
-      "current": "61df1710227a",
-      "sha256": "61df1710227aee405663ada5dbbdf1e5264f2916b1fb105e2f52d706bad9a5ac",
-      "size": 2376327,
-      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxos-greeter/61df1710227a/61df1710227aee405663ada5dbbdf1e5264f2916b1fb105e2f52d706bad9a5ac.tar.zst",
+      "current": "f80f4ff543da",
+      "sha256": "6891ed04205483888d99e62697eb70d59f27810db3338ee56f9213d912d0f3d5",
+      "size": 2377050,
+      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxos-greeter/f80f4ff543da/6891ed04205483888d99e62697eb70d59f27810db3338ee56f9213d912d0f3d5.tar.zst",
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxos-greeter/install.sh",
-      "desc": "ArxOS login/lock greeter",
+      "desc": "",
       "updated": "2026-09-24"
     },
     "arx": {
