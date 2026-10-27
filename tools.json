@@ -44,10 +44,10 @@
     },
     "arxctl": {
       "type": "core",
-      "current": "edb5e1f6b631",
-      "sha256": "ae9fea8193b8c38f111435e2f0346f15dccbeedc86dc1a9747b725989da51e28",
-      "size": 3734110,
-      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxctl/edb5e1f6b631/ae9fea8193b8c38f111435e2f0346f15dccbeedc86dc1a9747b725989da51e28.tar.zst",
+      "current": "14aaedb4ba06",
+      "sha256": "6d47f28720d732d4f5db3dcc01d38789b8f255062e6cb34fd091d623ad41d56d",
+      "size": 3752707,
+      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxctl/14aaedb4ba06/6d47f28720d732d4f5db3dcc01d38789b8f255062e6cb34fd091d623ad41d56d.tar.zst",
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxctl/install.sh",
       "desc": "",
       "updated": "2026-10-27"
