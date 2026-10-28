@@ -44,13 +44,13 @@
     },
     "arxctl": {
       "type": "core",
-      "current": "14aaedb4ba06",
-      "sha256": "6d47f28720d732d4f5db3dcc01d38789b8f255062e6cb34fd091d623ad41d56d",
-      "size": 3752707,
-      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxctl/14aaedb4ba06/6d47f28720d732d4f5db3dcc01d38789b8f255062e6cb34fd091d623ad41d56d.tar.zst",
+      "current": "23165b6bf8fe",
+      "sha256": "674554efafa3abdb44949b78c5cd99ff39aa75e158f96974a390cb3e5cca4290",
+      "size": 3764660,
+      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxctl/23165b6bf8fe/674554efafa3abdb44949b78c5cd99ff39aa75e158f96974a390cb3e5cca4290.tar.zst",
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxctl/install.sh",
       "desc": "",
-      "updated": "2026-10-27"
+      "updated": "2026-10-28"
     },
     "anonkit": {
       "type": "tool",
@@ -103,5 +103,5 @@
       "updated": "2026-09-23"
     }
   },
-  "updated": "2026-10-27"
+  "updated": "2026-10-28"
 }
