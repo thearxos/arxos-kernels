@@ -12,6 +12,11 @@
       "role": "real-time (RF, SDR, wireless capture)",
       "base": "Arch (ArxOS tuned)",
       "current": "7.2.5-1"
+    },
+    "linux-arxos-stable": {
+      "role": "default on the stable series, fewer changes",
+      "base": "Arch (ArxOS tuned)",
+      "current": "7.2.13-1"
     }
   },
   "tunes": [
@@ -33,6 +38,31 @@
     }
   ],
   "kernels": [
+    {
+      "flavor": "linux-arxos-stable",
+      "version": "7.2.13-1",
+      "upstream": "Linux 7.2.13",
+      "date": "2026-10",
+      "status": "current",
+      "changes": "New flavor: the newest release of the stable 7.2 series, Linux 7.2.13, with the same tuning as linux-arxos (BORE scheduler, ThinLTO, 1000 Hz, x86-64-v3), the full ARXOS hardening set and the kernel-level network privacy additions. Choose it when you value fewer changes over the newest features.",
+      "artifacts": {
+        "kernel": {
+          "file": "linux-arxos-stable-7.2.13-1-x86_64.pkg.tar.zst",
+          "size": 169145224,
+          "sha256": "a2d0b843c00fef5640edb693acffb2e7bd96e2c68f9d1598f70624065ec79597"
+        },
+        "headers": {
+          "file": "linux-arxos-stable-headers-7.2.13-1-x86_64.pkg.tar.zst",
+          "size": 44417167,
+          "sha256": "cb7bd50abfca661a6720c94a5ef19535df0759ddfbe43174d9e4d09b0c46a1b9"
+        }
+      },
+      "urls": {
+        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
+        "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-stable-7.2.13-1/",
+        "archive_org": null
+      }
+    },
     {
       "flavor": "linux-arxos",
       "version": "7.3.0-1",

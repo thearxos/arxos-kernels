@@ -20,6 +20,7 @@ _Manifests updated 2026-10-28._
 | --- | --- | --- | --- |
 | `linux-arxos` | default daily driver, newest mainline | Arch (ArxOS tuned) | 7.3.0-1 |
 | `linux-arxos-rt` | real-time (RF, SDR, wireless capture) | Arch (ArxOS tuned) | 7.2.5-1 |
+| `linux-arxos-stable` | default on the stable series, fewer changes | Arch (ArxOS tuned) | 7.2.13-1 |
 
 ## What ARXOS adds
 
@@ -34,6 +35,14 @@ Each one is here for a reason, not for a spec sheet:
 ## Kernel history
 
 Newest first. Each entry says what changed against the kernel before it.
+
+### linux-arxos-stable 7.2.13-1  (current)
+
+- **Upstream base:** Linux 7.2.13
+- **Released:** 2026-10
+- **What changed:** New flavor: the newest release of the stable 7.2 series, Linux 7.2.13, with the same tuning as linux-arxos (BORE scheduler, ThinLTO, 1000 Hz, x86-64-v3), the full ARXOS hardening set and the kernel-level network privacy additions. Choose it when you value fewer changes over the newest features.
+- **Kernel:** `linux-arxos-stable-7.2.13-1-x86_64.pkg.tar.zst` (161.3 MB, sha256 `a2d0b843c00f...`)
+- **Headers:** `linux-arxos-stable-headers-7.2.13-1-x86_64.pkg.tar.zst` (42.4 MB, sha256 `cb7bd50abfca...`)
 
 ### linux-arxos 7.3.0-1  (current)
 
