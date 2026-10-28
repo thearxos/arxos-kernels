@@ -9,7 +9,7 @@
       "size": 2377050,
       "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxos-greeter/f80f4ff543da/6891ed04205483888d99e62697eb70d59f27810db3338ee56f9213d912d0f3d5.tar.zst",
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxos-greeter/install.sh",
-      "desc": "",
+      "desc": "ArxOS login/lock greeter",
       "updated": "2026-09-24"
     },
     "arx": {
@@ -49,7 +49,7 @@
       "size": 3764660,
       "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxctl/23165b6bf8fe/674554efafa3abdb44949b78c5cd99ff39aa75e158f96974a390cb3e5cca4290.tar.zst",
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxctl/install.sh",
-      "desc": "",
+      "desc": "ArxOS Control Center (native Rust/Tauri)",
       "updated": "2026-10-28"
     },
     "anonkit": {
@@ -59,7 +59,7 @@
       "size": 291636,
       "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/anonkit/7c3733cac152/7b8b4d6b4545541c47ceee2c3a88eccf7f0a1536059753b6638d7f81e9d6b650.tar.zst",
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/anonkit/install.sh",
-      "desc": "",
+      "desc": "ArxOS AnonKit (fail-closed Tor anonymity daemon)",
       "updated": "2026-10-28"
     },
     "deathstroke": {
@@ -69,7 +69,7 @@
       "size": 558103,
       "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/deathstroke/980438dfa424f8a3a7774684e1ca96b70b6e12c9210b540c59c8c797d126a03c/980438dfa424f8a3a7774684e1ca96b70b6e12c9210b540c59c8c797d126a03c.tar.zst",
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/deathstroke/install.sh",
-      "desc": "",
+      "desc": "DEATHSTROKE emergency anti-forensics (duress crypto-erase)",
       "updated": "2026-09-13"
     },
     "droidB": {
@@ -89,7 +89,7 @@
       "size": 21640,
       "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxguard/8fb8348ac6fc/0dca547796d22ac7057eff3e8cd1aca3e96c5202a6d74bb16c1436959943f010.tar.zst",
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxguard/install.sh",
-      "desc": "",
+      "desc": "ArxOS zero-trust command guard (checks commands before they run)",
       "updated": "2026-09-23"
     },
     "arxos-vm-resize": {
@@ -99,7 +99,7 @@
       "size": 1545,
       "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxos-vm-resize/7a434cd4a08e/04761ebdbaffc00742c2ee7dfb9025b0db47f4b1a4846235f16dc1c857ea64d3.tar.zst",
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxos-vm-resize/install.sh",
-      "desc": "",
+      "desc": "Detects the hypervisor and starts the matching display auto-resize agent",
       "updated": "2026-09-23"
     }
   },
