@@ -60,8 +60,9 @@
       "urls": {
         "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
         "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-rt-7.3.0-1/",
-        "archive_org": null
-      }
+        "archive_org": "https://archive.org/download/arxos-linux-arxos-rt-7.3.0-1/"
+      },
+      "mirrored": "2026-10-28"
     },
     {
       "flavor": "linux-arxos-stable",
@@ -85,8 +86,9 @@
       "urls": {
         "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
         "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-stable-7.2.13-1/",
-        "archive_org": null
-      }
+        "archive_org": "https://archive.org/download/arxos-linux-arxos-stable-7.2.13-1/"
+      },
+      "mirrored": "2026-10-28"
     },
     {
       "flavor": "linux-arxos",
@@ -110,8 +112,9 @@
       "urls": {
         "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
         "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-7.3.0-1/",
-        "archive_org": null
-      }
+        "archive_org": "https://archive.org/download/arxos-linux-arxos-7.3.0-1/"
+      },
+      "mirrored": "2026-10-28"
     },
     {
       "flavor": "linux-arxos-rt",
