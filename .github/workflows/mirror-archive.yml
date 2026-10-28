@@ -1,13 +1,5 @@
 name: Mirror releases to archive.org
 
-# Cloud-to-cloud durable mirror: pulls each release binary from GitHub Releases
-# (kernels) or Cloudflare R2 (ISOs) on a GitHub runner, uploads it to archive.org,
-# and commits the resulting archive.org URLs back into the manifests. Nothing
-# touches a local machine, so it does not depend on the maintainer's connection.
-#
-# Requires two repo secrets (Settings > Secrets and variables > Actions):
-#   IA_ACCESS_KEY / IA_SECRET_KEY  -- archive.org S3 keys (archive.org/account/s3.php)
-
 on:
   workflow_dispatch:
     inputs:
