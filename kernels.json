@@ -1,12 +1,12 @@
 {
   "manifest": "arxos-kernels/v1",
-  "updated": "2026-09-22",
+  "updated": "2026-10-28",
   "note": "Public history of every ARXOS kernel. Text only: the patch code and config stay private. Binaries live on Cloudflare R2 (current, fast) and archive.org / GitHub Releases (full history, rollback).",
   "flavors": {
     "linux-arxos": {
-      "role": "default daily driver",
+      "role": "default daily driver, newest mainline",
       "base": "Arch (ArxOS tuned)",
-      "current": "7.2.5-1"
+      "current": "7.3.0-1"
     },
     "linux-arxos-rt": {
       "role": "real-time (RF, SDR, wireless capture)",
@@ -34,6 +34,31 @@
   ],
   "kernels": [
     {
+      "flavor": "linux-arxos",
+      "version": "7.3.0-1",
+      "upstream": "Linux 7.3.0",
+      "date": "2026-10",
+      "status": "current",
+      "changes": "Moves the default kernel to the newest mainline, Linux 7.3.0. Keeps the BORE scheduler, ThinLTO, 1000 Hz and the x86-64-v3 baseline with the full ARXOS hardening set (lockdown, IMA, strict IOMMU, memory zeroing on allocation and free, live patching), and adds kernel-level network privacy: link-layer MAC rewrite and filtering, NAT and redirect for the transparent proxy, packet logging for AnonKit, SYN cookies, reverse-path filtering and IPv6 privacy support.",
+      "artifacts": {
+        "kernel": {
+          "file": "linux-arxos-7.3.0-1-x86_64.pkg.tar.zst",
+          "size": 157837999,
+          "sha256": "4c835f09d646e2fba18392f70b0a2264572e3fb8842bb60aa5511733a308fa17"
+        },
+        "headers": {
+          "file": "linux-arxos-headers-7.3.0-1-x86_64.pkg.tar.zst",
+          "size": 44877304,
+          "sha256": "e636c94a433a489b175fdbc9980e364f9ace937e2317e81d8bde920c451aa2f1"
+        }
+      },
+      "urls": {
+        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
+        "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-7.3.0-1/",
+        "archive_org": null
+      }
+    },
+    {
       "flavor": "linux-arxos-rt",
       "version": "7.2.5-1",
       "upstream": "Linux 7.2.5",
@@ -53,7 +78,7 @@
         }
       },
       "urls": {
-        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
+        "r2": null,
         "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-rt-7.2.5-1/",
         "archive_org": "https://archive.org/download/arxos-linux-arxos-rt-7.2.5-1/"
       },
@@ -64,7 +89,7 @@
       "version": "7.2.5-1",
       "upstream": "Linux 7.2.5",
       "date": "2026-09",
-      "status": "current",
+      "status": "retired",
       "changes": "Rebased onto Linux 7.2.5 with the full ARXOS performance and hardening set carried forward: latest upstream security fixes, tuned scheduler, full preemption, 1000 Hz, ThinLTO, plus lockdown, IMA, IOMMU-strict, init-on-alloc/free and live patching.",
       "artifacts": {
         "kernel": {
@@ -79,7 +104,7 @@
         }
       },
       "urls": {
-        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
+        "r2": null,
         "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-7.2.5-1/",
         "archive_org": "https://archive.org/download/arxos-linux-arxos-7.2.5-1/"
       },

@@ -12,13 +12,13 @@ Binaries are hosted in more than one place so nothing ever disappears:
 - **GitHub Releases** — every kernel version (ISOs are too large for Releases).
 - **archive.org** — a durable mirror of every kernel and ISO, for the long haul.
 
-_Manifests updated 2026-09-22._
+_Manifests updated 2026-10-28._
 
 ## Kernels
 
 | Flavor | Role | Base | Current |
 | --- | --- | --- | --- |
-| `linux-arxos` | default daily driver | Arch (ArxOS tuned) | 7.2.5-1 |
+| `linux-arxos` | default daily driver, newest mainline | Arch (ArxOS tuned) | 7.3.0-1 |
 | `linux-arxos-rt` | real-time (RF, SDR, wireless capture) | Arch (ArxOS tuned) | 7.2.5-1 |
 
 ## What ARXOS adds
@@ -35,6 +35,14 @@ Each one is here for a reason, not for a spec sheet:
 
 Newest first. Each entry says what changed against the kernel before it.
 
+### linux-arxos 7.3.0-1  (current)
+
+- **Upstream base:** Linux 7.3.0
+- **Released:** 2026-10
+- **What changed:** Moves the default kernel to the newest mainline, Linux 7.3.0. Keeps the BORE scheduler, ThinLTO, 1000 Hz and the x86-64-v3 baseline with the full ARXOS hardening set (lockdown, IMA, strict IOMMU, memory zeroing on allocation and free, live patching), and adds kernel-level network privacy: link-layer MAC rewrite and filtering, NAT and redirect for the transparent proxy, packet logging for AnonKit, SYN cookies, reverse-path filtering and IPv6 privacy support.
+- **Kernel:** `linux-arxos-7.3.0-1-x86_64.pkg.tar.zst` (150.5 MB, sha256 `4c835f09d646...`)
+- **Headers:** `linux-arxos-headers-7.3.0-1-x86_64.pkg.tar.zst` (42.8 MB, sha256 `e636c94a433a...`)
+
 ### linux-arxos-rt 7.2.5-1  (current)
 
 - **Upstream base:** Linux 7.2.5
@@ -44,7 +52,7 @@ Newest first. Each entry says what changed against the kernel before it.
 - **Headers:** `linux-arxos-rt-headers-7.2.5-1-x86_64.pkg.tar.zst` (43.8 MB, sha256 `028d94e7be6f...`)
 - **Mirror:** archived on archive.org
 
-### linux-arxos 7.2.5-1  (current)
+### linux-arxos 7.2.5-1  (retired)
 
 - **Upstream base:** Linux 7.2.5
 - **Released:** 2026-09
