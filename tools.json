@@ -54,13 +54,13 @@
     },
     "anonkit": {
       "type": "tool",
-      "current": "3f0899c8035d",
-      "sha256": "c58ba01f483162a8fab28cc2b53f6d4f580bee742f7b5f555665a0f0b58caf32",
-      "size": 269590,
-      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/anonkit-3f0899c8035d.tar.zst",
+      "current": "7c3733cac152",
+      "sha256": "7b8b4d6b4545541c47ceee2c3a88eccf7f0a1536059753b6638d7f81e9d6b650",
+      "size": 291636,
+      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/anonkit/7c3733cac152/7b8b4d6b4545541c47ceee2c3a88eccf7f0a1536059753b6638d7f81e9d6b650.tar.zst",
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/anonkit/install.sh",
-      "desc": "ArxOS AnonKit (fail-closed Tor anonymity daemon)",
-      "updated": "2026-09-07"
+      "desc": "",
+      "updated": "2026-10-28"
     },
     "deathstroke": {
       "type": "tool",
