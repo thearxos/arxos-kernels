@@ -36,12 +36,44 @@ w("that mirrors every release to archive.org.")
 w("")
 w("Binaries are hosted in more than one place so nothing ever disappears:")
 w("")
-w("- **Cloudflare R2** — the current kernel and ISO, for fast downloads.")
-w("- **GitHub Releases** — every kernel version (ISOs are too large for Releases).")
-w("- **archive.org** — a durable mirror of every kernel and ISO, for the long haul.")
+w("- **Cloudflare R2:** the current kernel and ISO, for fast downloads.")
+w("- **GitHub Releases:** every kernel version (ISOs are too large for Releases).")
+w("- **archive.org:** a durable mirror of every kernel and ISO, for the long haul.")
 w("")
 w(f"_Manifests updated {M['updated']}._")
 w("")
+
+def kernel_status(flavor, version):
+    for k in M["kernels"]:
+        if k["flavor"] == flavor and k["version"] == version:
+            return k.get("status", "")
+    return "not in the manifest"
+
+
+# what an installed ISO is running, and whether it is still current
+current_isos = [im for im in I.get("images", []) if im.get("status") == "current" and im.get("kernels")]
+if current_isos:
+    w("## If you installed from an ISO")
+    w("")
+    for im in current_isos:
+        title = f"ArxOS {im['version']}" + (f" ({im['edition']})" if im.get("edition") else "")
+        w(f"{title} preinstalls these kernels:")
+        w("")
+        w("| Kernel | Preinstalled | Status | Current |")
+        w("| --- | --- | --- | --- |")
+        for flavor, ver in im["kernels"].items():
+            st = kernel_status(flavor, ver)
+            cur = M["flavors"].get(flavor, {}).get("current", "")
+            w(f"| `{flavor}` | {ver} | {'**' + st + '**' if st == 'retired' else st} | {cur} |")
+        w("")
+    w("A retired kernel still boots, but it no longer receives fixes. Update right after")
+    w("installing:")
+    w("")
+    w("```")
+    w("arx update                       # the system, the ArxOS tools and the kernels, in one step")
+    w("arx kernel install linux-arxos   # or move one kernel to its current version")
+    w("```")
+    w("")
 
 # flavors / current
 w("## Kernels")
@@ -105,6 +137,9 @@ if I.get("images"):
         w(f"- **Base:** {im.get('upstream','')}")
         w(f"- **Released:** {im.get('date','')}")
         w(f"- **What changed:** {im.get('changes','')}")
+        if im.get("kernels"):
+            pre = ", ".join(f"`{f}` {v} ({kernel_status(f, v)})" for f, v in im["kernels"].items())
+            w(f"- **Preinstalled kernels:** {pre}")
         iso = im["artifacts"]["iso"]
         if iso.get("sha256"):
             w(f"- **Image:** `{iso['file']}` ({gb(iso['size'])}, sha256 `{short(iso['sha256'])}...`)")
@@ -123,13 +158,15 @@ w("")
 w("On ARXOS, use the Control Center Kernels panel, or the command line:")
 w("")
 w("```")
-w("arxos-kernel list    linux-arxos      # every version, newest first")
-w("arxos-kernel latest  linux-arxos      # the newest version")
-w("arxos-kernel install linux-arxos      # install the latest")
-w("arxos-kernel install linux-arxos 7.1.3-1   # roll back to a specific version")
+w("arx kernels list                        # every version, newest first")
+w("arx kernel install linux-arxos          # install a flavor at its current version")
+w("arx kernel install stable               # shorthands: default, rt, stable, stable-rt")
+w("arx kernel install linux-arxos 7.2.5-1  # roll back to a specific version")
+w("arx kernel remove linux-arxos-rt        # refuses the running or the last kernel")
 w("```")
 w("")
-w("The current kernel downloads from R2; older versions come from the full history.")
+w("The current kernel downloads from R2, with the GitHub copy as a fallback; older")
+w("versions come from the full history.")
 w("Every download is checked against the sha256 in this manifest before it installs.")
 w("")
 
@@ -137,7 +174,7 @@ w("")
 w("## Mirroring and automation")
 w("")
 w("Every release is copied to archive.org as a durable second home, entirely in the")
-w("cloud — nothing depends on a maintainer's connection or upload speed.")
+w("cloud, so nothing depends on a maintainer's connection or upload speed.")
 w("")
 w("- **`tools/mirror-to-archive.py`** downloads each release from its primary source")
 w("  (GitHub Releases for kernels, R2 for ISOs), verifies or computes the SHA-256,")

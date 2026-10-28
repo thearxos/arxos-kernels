@@ -8,11 +8,28 @@ that mirrors every release to archive.org.
 
 Binaries are hosted in more than one place so nothing ever disappears:
 
-- **Cloudflare R2** — the current kernel and ISO, for fast downloads.
-- **GitHub Releases** — every kernel version (ISOs are too large for Releases).
-- **archive.org** — a durable mirror of every kernel and ISO, for the long haul.
+- **Cloudflare R2:** the current kernel and ISO, for fast downloads.
+- **GitHub Releases:** every kernel version (ISOs are too large for Releases).
+- **archive.org:** a durable mirror of every kernel and ISO, for the long haul.
 
 _Manifests updated 2026-10-28._
+
+## If you installed from an ISO
+
+ArxOS 0.0.1 (slim) preinstalls these kernels:
+
+| Kernel | Preinstalled | Status | Current |
+| --- | --- | --- | --- |
+| `linux-arxos` | 7.2.5-1 | **retired** | 7.3.0-1 |
+| `linux-arxos-rt` | 7.2.5-1 | current | 7.2.5-1 |
+
+A retired kernel still boots, but it no longer receives fixes. Update right after
+installing:
+
+```
+arx update                       # the system, the ArxOS tools and the kernels, in one step
+arx kernel install linux-arxos   # or move one kernel to its current version
+```
 
 ## Kernels
 
@@ -119,6 +136,7 @@ too large for GitHub Releases.
 - **Base:** Arch (ArxOS tuned)
 - **Released:** 2026-09
 - **What changed:** First public ArxOS release. Slim image: a lean base with the ArxOS toolkit built in; add the security arsenal on demand with arx after install. linux-arxos 7.2.5-1, zram baked in, DEATHSTROKE installed inert, install-gate verified on real hardware and in VMs.
+- **Preinstalled kernels:** `linux-arxos` 7.2.5-1 (retired), `linux-arxos-rt` 7.2.5-1 (current)
 - **Image:** `arxos-0.0.1.iso` (3.93 GB, sha256 `18d87568b4e2...`)
 - **Mirror:** archived on archive.org
 
@@ -127,19 +145,21 @@ too large for GitHub Releases.
 On ARXOS, use the Control Center Kernels panel, or the command line:
 
 ```
-arxos-kernel list    linux-arxos      # every version, newest first
-arxos-kernel latest  linux-arxos      # the newest version
-arxos-kernel install linux-arxos      # install the latest
-arxos-kernel install linux-arxos 7.1.3-1   # roll back to a specific version
+arx kernels list                        # every version, newest first
+arx kernel install linux-arxos          # install a flavor at its current version
+arx kernel install stable               # shorthands: default, rt, stable, stable-rt
+arx kernel install linux-arxos 7.2.5-1  # roll back to a specific version
+arx kernel remove linux-arxos-rt        # refuses the running or the last kernel
 ```
 
-The current kernel downloads from R2; older versions come from the full history.
+The current kernel downloads from R2, with the GitHub copy as a fallback; older
+versions come from the full history.
 Every download is checked against the sha256 in this manifest before it installs.
 
 ## Mirroring and automation
 
 Every release is copied to archive.org as a durable second home, entirely in the
-cloud — nothing depends on a maintainer's connection or upload speed.
+cloud, so nothing depends on a maintainer's connection or upload speed.
 
 - **`tools/mirror-to-archive.py`** downloads each release from its primary source
   (GitHub Releases for kernels, R2 for ISOs), verifies or computes the SHA-256,

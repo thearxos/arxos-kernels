@@ -23,7 +23,11 @@
         "github": null,
         "archive_org": "https://archive.org/download/arxos-0.0.1-slim/"
       },
-      "mirrored": "2026-09-22"
+      "mirrored": "2026-09-22",
+      "kernels": {
+        "linux-arxos": "7.2.5-1",
+        "linux-arxos-rt": "7.2.5-1"
+      }
     }
   ]
 }
