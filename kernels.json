@@ -11,7 +11,7 @@
     "linux-arxos-rt": {
       "role": "real-time (RF, SDR, wireless capture)",
       "base": "Arch (ArxOS tuned)",
-      "current": "7.2.5-1"
+      "current": "7.3.0-1"
     },
     "linux-arxos-stable": {
       "role": "default on the stable series, fewer changes",
@@ -38,6 +38,31 @@
     }
   ],
   "kernels": [
+    {
+      "flavor": "linux-arxos-rt",
+      "version": "7.3.0-1",
+      "upstream": "Linux 7.3.0",
+      "date": "2026-10",
+      "status": "current",
+      "changes": "Real-time (PREEMPT_RT + rt-bore) on the newest mainline, Linux 7.3.0, with the full ARXOS hardening and privacy set carried forward: forced-threaded IRQs, 1000 Hz, lockdown, IMA, strict IOMMU, memory zeroing on allocation and free, live patching, and the kernel-level network privacy additions. No LTO (RT and LTO do not mix). Supersedes the 7.2.5 real-time build.",
+      "artifacts": {
+        "kernel": {
+          "file": "linux-arxos-rt-7.3.0-1-x86_64.pkg.tar.zst",
+          "size": 163799132,
+          "sha256": "0edb11eb3aadbfc380355c46713f15bff14b43d9ec609093f3e53574ee7c82cb"
+        },
+        "headers": {
+          "file": "linux-arxos-rt-headers-7.3.0-1-x86_64.pkg.tar.zst",
+          "size": 46407534,
+          "sha256": "200db849a659152e492eab42f548788a593e71df71622d41fbcb6ebc4ab054cd"
+        }
+      },
+      "urls": {
+        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
+        "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-rt-7.3.0-1/",
+        "archive_org": null
+      }
+    },
     {
       "flavor": "linux-arxos-stable",
       "version": "7.2.13-1",
@@ -93,7 +118,7 @@
       "version": "7.2.5-1",
       "upstream": "Linux 7.2.5",
       "date": "2026-09",
-      "status": "current",
+      "status": "retired",
       "changes": "Real-time (PREEMPT_RT + BORE) rebased onto Linux 7.2.5 with the full ARXOS hardening set: latest upstream security fixes, forced-threaded IRQs, RCU boost, 1000 Hz, plus lockdown, IMA, IOMMU-strict, init-on-alloc/free and live patching. No LTO (RT and LTO do not mix).",
       "artifacts": {
         "kernel": {
