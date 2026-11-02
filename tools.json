@@ -74,13 +74,13 @@
     },
     "droidB": {
       "type": "tool",
-      "current": "0.4.9",
-      "sha256": "c3667995a83652f82d99acdda6f570e494b60257254d0e111076593027091951",
-      "size": 102463263,
-      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/droidB/0.4.9/c3667995a83652f82d99acdda6f570e494b60257254d0e111076593027091951.tar.zst",
+      "current": "0.4.10",
+      "sha256": "b2b58b58cfa73b0083ed16c98c98a079fbf02df664f97c613d8d1b282f6e9a45",
+      "size": 102461087,
+      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/droidB/0.4.10/b2b58b58cfa73b0083ed16c98c98a079fbf02df664f97c613d8d1b282f6e9a45.tar.zst",
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/droidB/install.sh",
       "desc": "ArxOS Android and iPhone toolkit: spyware scan, fleet, deep clean, flashing",
-      "updated": "2026-11-02T19:24:50Z"
+      "updated": "2026-11-02T19:30:10Z"
     },
     "arxguard": {
       "type": "tool",
@@ -93,5 +93,5 @@
       "updated": "2026-09-23"
     }
   },
-  "updated": "2026-11-02T19:24:50Z"
+  "updated": "2026-11-02T19:30:10Z"
 }
