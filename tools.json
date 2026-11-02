@@ -24,13 +24,13 @@
     },
     "arxupd": {
       "type": "core",
-      "current": "a6ce76ad4fd6",
-      "sha256": "4fab2f9c343f97cf4b9d80a9e1ba63f416163caff2274af2aa70b15d69fccee4",
-      "size": 1543,
-      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxupd-a6ce76ad4fd6.tar.zst",
+      "current": "21d94036fc6e",
+      "sha256": "6532344999ea0dddae3da1e189a9fcc3aa0b9e485dc229a44bd5060ac0442fae",
+      "size": 1785,
+      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxupd/21d94036fc6e/6532344999ea0dddae3da1e189a9fcc3aa0b9e485dc229a44bd5060ac0442fae.tar.zst",
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxupd/install.sh",
       "desc": "ArxOS updater (delegates to arx tools/R2)",
-      "updated": "2026-09-07"
+      "updated": "2026-11-02T14:03:57Z"
     },
     "arxos-browser": {
       "type": "core",
@@ -93,5 +93,5 @@
       "updated": "2026-09-23"
     }
   },
-  "updated": "2026-11-02T13:59:52Z"
+  "updated": "2026-11-02T14:03:57Z"
 }
