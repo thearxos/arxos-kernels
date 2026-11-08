@@ -1,29 +1,30 @@
 {
-  "manifest": "arxos-isos/v1",
-  "updated": "2026-09-22",
-  "note": "Public history of every ARXOS ISO image. Binaries live on Cloudflare R2 (current, fast) and archive.org (durable mirror). ISOs are too large for GitHub Releases, so R2 is the primary and archive.org is the backup.",
-  "images": [
-    {
-      "edition": "slim",
-      "version": "0.0.1",
-      "title": "ArxOS 0.0.1 (slim)",
-      "upstream": "Arch (ArxOS tuned)",
-      "date": "2026-09",
-      "status": "current",
-      "changes": "First public ArxOS release. Slim image: a lean base with the ArxOS toolkit built in; add the security arsenal on demand with arx after install. linux-arxos 7.2.5-1, zram baked in, DEATHSTROKE installed inert, install-gate verified on real hardware and in VMs.",
-      "artifacts": {
-        "iso": {
-          "file": "arxos-0.0.1.iso",
-          "size": 4223172608,
-          "sha256": "18d87568b4e2cf4d2e83bb0052c93a5d76b12708bd942e86029ea612c1f2d44d"
-        }
-      },
-      "urls": {
-        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/",
-        "github": null,
-        "archive_org": "https://archive.org/download/arxos-0.0.1-slim/"
-      },
-      "mirrored": "2026-09-22"
+ "manifest": "arxos-isos/v1",
+ "updated": "2026-11-09",
+ "note": "Public history of every ARXOS ISO image. Binaries live on Cloudflare R2 (current, fast) and archive.org (durable mirror). ISOs are too large for GitHub Releases, so R2 is the primary and archive.org is the backup.",
+ "images": [
+  {
+   "edition": "slim",
+   "version": "0.0.1",
+   "title": "ArxOS 0.0.1 (slim)",
+   "upstream": "Arch (ArxOS tuned)",
+   "date": "2026-09",
+   "status": "retired",
+   "changes": "First public ArxOS release. Slim image: a lean base with the ArxOS toolkit built in; add the security arsenal on demand with arx after install. linux-arxos 7.2.5-1, zram baked in. KNOWN ISSUE (fixed in 0.0.2): the login screen can reject the password set during installation. You do not need to reinstall — set a new password from the boot menu (see arxos.uk/docs#recovery), then run arx update. Retired from the Cloudflare R2 CDN on 2026-11-09 and preserved on archive.org; download it there.",
+   "artifacts": {
+    "iso": {
+     "file": "arxos-0.0.1.iso",
+     "size": 4223172608,
+     "sha256": "18d87568b4e2cf4d2e83bb0052c93a5d76b12708bd942e86029ea612c1f2d44d"
     }
-  ]
+   },
+   "urls": {
+    "r2": null,
+    "github": null,
+    "archive_org": "https://archive.org/download/arxos-0.0.1-slim/"
+   },
+   "mirrored": "2026-09-22",
+   "retired": "2026-11-09"
+  }
+ ]
 }
