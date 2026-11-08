@@ -1,0 +1,69 @@
+name: upstream kernel security watch
+
+# ArxOS ships a CUSTOM kernel (linux-arxos), so it does not get upstream security point-releases
+# automatically the way a stock Arch kernel does - someone has to rebuild it. This watches
+# kernel.org and opens an issue the moment the published linux-arxos falls behind the current stable
+# branch, so a kernel security fix is never missed. It does NOT build anything (a kernel build is
+# hours and needs the host); it only raises the signal to rebuild and republish.
+
+on:
+  schedule:
+    - cron: '17 6 * * 1'   # every Monday, 06:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Compare published linux-arxos against upstream stable
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const up = await (await fetch('https://www.kernel.org/releases.json')).json();
+            const ours = await (await fetch('https://raw.githubusercontent.com/thearxos/arxos-kernels/main/kernels.json')).json();
+
+            const stable = up.latest_stable.version;                 // e.g. "7.3.3"
+            const eolBranches = new Set(up.releases.filter(r => r.iseol).map(r => r.version.split('.').slice(0,2).join('.')));
+            const cmp = (a, b) => {                                   // numeric version compare
+              const pa = a.split('-')[0].split('.').map(Number), pb = b.split('-')[0].split('.').map(Number);
+              for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
+                const d = (pa[i] || 0) - (pb[i] || 0);
+                if (d) return d;
+              }
+              return 0;
+            };
+
+            // the newest published build of each shipped flavor that is marked current
+            const current = (ours.kernels || []).filter(k => k.status === 'current');
+            const def = current.find(k => k.flavor === 'linux-arxos');
+            const stab = current.find(k => k.flavor === 'linux-arxos-stable');
+
+            const problems = [];
+            if (def && cmp(stable, def.version) > 0)
+              problems.push(`**linux-arxos** is ${def.version} but upstream stable is **${stable}** (behind, security fixes pending). Rebuild with \`akt build\` (rolling latest) and republish.`);
+            for (const k of current) {
+              const branch = k.version.split('.').slice(0,2).join('.');
+              if (eolBranches.has(branch))
+                problems.push(`**${k.flavor}** ${k.version} is on branch ${branch}.x, which upstream has marked **END OF LIFE** - it gets no more security fixes. Move it to the current stable or an LTS longterm branch.`);
+            }
+
+            if (!problems.length) {
+              core.info(`up to date: linux-arxos ${def ? def.version : '?'} vs upstream stable ${stable}`);
+              return;
+            }
+
+            const title = `kernel security: linux-arxos behind upstream (stable ${stable})`;
+            const body = [`Upstream stable is **${stable}**. Published ArxOS kernels need attention so users keep receiving official Linux security patches:\n`, ...problems.map(p => `- ${p}`), `\n_Raised automatically by upstream-security-watch; rebuild on the host (akt), gate, boot-test, then publish to R2 + kernels.json so \`arx update\` delivers it._`].join('\n');
+            const existing = (await github.rest.issues.listForRepo({ owner: context.repo.owner, repo: context.repo.repo, state: 'open', labels: 'kernel-security' })).data[0];
+            if (existing) {
+              await github.rest.issues.update({ owner: context.repo.owner, repo: context.repo.repo, issue_number: existing.number, title, body });
+              core.notice(`updated issue #${existing.number}`);
+            } else {
+              const created = await github.rest.issues.create({ owner: context.repo.owner, repo: context.repo.repo, title, body, labels: ['kernel-security'] });
+              core.notice(`opened issue #${created.data.number}`);
+            }
+            core.setFailed(problems.join(' '));   // red run = a kernel security rebuild is due
