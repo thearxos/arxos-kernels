@@ -62,16 +62,6 @@
       "desc": "ArxOS AnonKit (fail-closed Tor anonymity daemon)",
       "updated": "2026-10-28"
     },
-    "deathstroke": {
-      "type": "tool",
-      "current": "980438dfa424f8a3a7774684e1ca96b70b6e12c9210b540c59c8c797d126a03c",
-      "sha256": "980438dfa424f8a3a7774684e1ca96b70b6e12c9210b540c59c8c797d126a03c",
-      "size": 558103,
-      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/deathstroke/980438dfa424f8a3a7774684e1ca96b70b6e12c9210b540c59c8c797d126a03c/980438dfa424f8a3a7774684e1ca96b70b6e12c9210b540c59c8c797d126a03c.tar.zst",
-      "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/deathstroke/install.sh",
-      "desc": "DEATHSTROKE emergency anti-forensics (duress crypto-erase)",
-      "updated": "2026-09-13"
-    },
     "droidB": {
       "type": "tool",
       "current": "0.4.17",
@@ -93,5 +83,5 @@
       "updated": "2026-09-23"
     }
   },
-  "updated": "2026-11-09T07:40:36Z"
+  "updated": "2026-11-09T07:48:00Z"
 }
