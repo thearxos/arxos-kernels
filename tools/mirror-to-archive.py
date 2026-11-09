@@ -137,7 +137,8 @@ def iso_metadata(im: dict) -> dict:
         "creator": "Stingray Labs",
         "subject": ["ArxOS", "linux", "iso", "operating system"],
         "date": im.get("date", ""),
-        "description": (f"ArxOS {im['version']} ({im.get('edition','')}) installable "
+        # an edition is shown only when the image has one; from 0.0.2 ArxOS ships a single image
+        "description": (f"ArxOS {im['version']}" + (f" ({im['edition']})" if im.get("edition") else "") + " installable "
                         f"ISO image. Durable mirror of the ArxOS release. "
                         f"Project: https://arxos.uk"),
         "licenseurl": "https://www.gnu.org/licenses/gpl-3.0.html",
