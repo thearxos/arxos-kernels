@@ -34,13 +34,13 @@
     },
     "arxos-browser": {
       "type": "core",
-      "current": "8e20b9b6e7f6",
-      "sha256": "d5405f41722bb0904701a70211f27a3c19478e05bad2e8fd912085470324f6c7",
-      "size": 225984,
-      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxos-browser-8e20b9b6e7f6.tar.zst",
+      "current": "3cc9b1d7980f",
+      "sha256": "584ab3a6060a6b793d1f7ef19002d8d4573b956c83b31468748d60fbc542a443",
+      "size": 93329,
+      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxos-browser/3cc9b1d7980f/584ab3a6060a6b793d1f7ef19002d8d4573b956c83b31468748d60fbc542a443.tar.zst",
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arxos-browser/install.sh",
       "desc": "ArxOS hardened browser defaults + welcome page",
-      "updated": "2026-09-07"
+      "updated": "2026-11-12T15:10:32Z"
     },
     "arxctl": {
       "type": "core",
@@ -83,5 +83,5 @@
       "updated": "2026-09-23"
     }
   },
-  "updated": "2026-11-12T10:05:03Z"
+  "updated": "2026-11-12T15:10:32Z"
 }
