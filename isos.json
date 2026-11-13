@@ -7,7 +7,7 @@
    "edition": "slim",
    "version": "0.0.1",
    "title": "ArxOS 0.0.1 (slim)",
-   "upstream": "Arch (ArxOS tuned)",
+   "upstream": "ArxOS tuned",
    "date": "2026-09",
    "status": "retired",
    "changes": "First public ArxOS release. Slim image: a lean base with the ArxOS toolkit built in; add the security arsenal on demand with arx after install. linux-arxos 7.2.5-1, zram baked in. KNOWN ISSUE (fixed in 0.0.2): the login screen can reject the password set during installation. You do not need to reinstall — set a new password from the boot menu (see arxos.uk/docs#recovery), then run arx update. Retired from the Cloudflare R2 CDN on 2026-11-09 and preserved on archive.org; download it there.",

@@ -1,6 +1,10 @@
 name: Mirror releases to archive.org
 
 on:
+  # the private publisher adds a new kernel to kernels.json and pushes: mirror it then
+  push:
+    branches: [main]
+    paths: [kernels.json]
   workflow_dispatch:
     inputs:
       target:
@@ -48,8 +52,8 @@ jobs:
           IA_SECRET_KEY: ${{ secrets.IA_SECRET_KEY }}
         run: |
           python tools/mirror-to-archive.py \
-            --target "${{ inputs.target }}" \
-            --limit "${{ inputs.limit }}" \
+            --target "${{ inputs.target || 'kernels' }}" \
+            --limit "${{ inputs.limit || '0' }}" \
             ${{ inputs.dry_run == true && '--dry-run' || '' }}
 
       - name: Commit manifest updates

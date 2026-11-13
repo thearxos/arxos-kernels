@@ -5,17 +5,17 @@
   "flavors": {
     "linux-arxos": {
       "role": "default daily driver, newest mainline",
-      "base": "Arch (ArxOS tuned)",
+      "base": "ArxOS tuned",
       "current": "7.3.0-1"
     },
     "linux-arxos-rt": {
       "role": "real-time (RF, SDR, wireless capture)",
-      "base": "Arch (ArxOS tuned)",
+      "base": "ArxOS tuned",
       "current": "7.3.0-1"
     },
     "linux-arxos-stable": {
       "role": "default on the stable series, fewer changes",
-      "base": "Arch (ArxOS tuned)",
+      "base": "ArxOS tuned",
       "current": "7.2.13-1"
     }
   },

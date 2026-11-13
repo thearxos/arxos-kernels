@@ -10,7 +10,7 @@ records the archive.org URL on its next run, and the release page shows it.
         [--r2 https://pub-XXXX.r2.dev/]   # default: the current ArxOS R2 base
         [--size N]                         # default: HEAD the R2 object
         [--sha SHA256]                     # default: left blank; the mirror fills it
-        [--upstream "Arch (ArxOS tuned)"] [--title "ArxOS 0.0.2 (slim)"]
+        [--upstream "ArxOS tuned"] [--title "ArxOS 0.0.2 (slim)"]
 
 The new version becomes `current`; any previous `current` of the SAME edition is
 demoted to `retired` (its download URLs are kept, so old images stay reachable —
@@ -44,7 +44,7 @@ def main():
     p.add_argument("--file", required=True, help="ISO filename, e.g. arxos-0.0.2.iso")
     p.add_argument("--changes", required=True)
     p.add_argument("--date", default=datetime.date.today().strftime("%Y-%m"))
-    p.add_argument("--upstream", default="Arch (ArxOS tuned)")
+    p.add_argument("--upstream", default="ArxOS tuned")
     p.add_argument("--title", default=None, help="default: 'ArxOS <version> (<edition>)'")
     p.add_argument("--r2", default=DEFAULT_R2, help="R2 base URL the ISO lives under")
     p.add_argument("--size", type=int, default=None, help="bytes; default HEADs the R2 object")

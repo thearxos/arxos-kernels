@@ -18,9 +18,9 @@ _Manifests updated 2026-10-28._
 
 | Flavor | Role | Base | Current |
 | --- | --- | --- | --- |
-| `linux-arxos` | default daily driver, newest mainline | Arch (ArxOS tuned) | 7.3.0-1 |
-| `linux-arxos-rt` | real-time (RF, SDR, wireless capture) | Arch (ArxOS tuned) | 7.3.0-1 |
-| `linux-arxos-stable` | default on the stable series, fewer changes | Arch (ArxOS tuned) | 7.2.13-1 |
+| `linux-arxos` | default daily driver, newest mainline | ArxOS tuned | 7.3.0-1 |
+| `linux-arxos-rt` | real-time (RF, SDR, wireless capture) | ArxOS tuned | 7.3.0-1 |
+| `linux-arxos-stable` | default on the stable series, fewer changes | ArxOS tuned | 7.2.13-1 |
 
 ## What ARXOS adds
 
@@ -43,6 +43,7 @@ Newest first. Each entry says what changed against the kernel before it.
 - **What changed:** Real-time (PREEMPT_RT + rt-bore) on the newest mainline, Linux 7.3.0, with the full ARXOS hardening and privacy set carried forward: forced-threaded IRQs, 1000 Hz, lockdown, IMA, strict IOMMU, memory zeroing on allocation and free, live patching, and the kernel-level network privacy additions. No LTO (RT and LTO do not mix). Supersedes the 7.2.5 real-time build.
 - **Kernel:** `linux-arxos-rt-7.3.0-1-x86_64.pkg.tar.zst` (156.2 MB, sha256 `0edb11eb3aad...`)
 - **Headers:** `linux-arxos-rt-headers-7.3.0-1-x86_64.pkg.tar.zst` (44.3 MB, sha256 `200db849a659...`)
+- **Mirror:** archived on archive.org
 
 ### linux-arxos-stable 7.2.13-1  (current)
 
@@ -51,6 +52,7 @@ Newest first. Each entry says what changed against the kernel before it.
 - **What changed:** New flavor: the newest release of the stable 7.2 series, Linux 7.2.13, with the same tuning as linux-arxos (BORE scheduler, ThinLTO, 1000 Hz, x86-64-v3), the full ARXOS hardening set and the kernel-level network privacy additions. Choose it when you value fewer changes over the newest features.
 - **Kernel:** `linux-arxos-stable-7.2.13-1-x86_64.pkg.tar.zst` (161.3 MB, sha256 `a2d0b843c00f...`)
 - **Headers:** `linux-arxos-stable-headers-7.2.13-1-x86_64.pkg.tar.zst` (42.4 MB, sha256 `cb7bd50abfca...`)
+- **Mirror:** archived on archive.org
 
 ### linux-arxos 7.3.0-1  (current)
 
@@ -59,6 +61,7 @@ Newest first. Each entry says what changed against the kernel before it.
 - **What changed:** Moves the default kernel to the newest mainline, Linux 7.3.0. Keeps the BORE scheduler, ThinLTO, 1000 Hz and the x86-64-v3 baseline with the full ARXOS hardening set (lockdown, IMA, strict IOMMU, memory zeroing on allocation and free, live patching), and adds kernel-level network privacy: link-layer MAC rewrite and filtering, NAT and redirect for the transparent proxy, packet logging for AnonKit, SYN cookies, reverse-path filtering and IPv6 privacy support.
 - **Kernel:** `linux-arxos-7.3.0-1-x86_64.pkg.tar.zst` (150.5 MB, sha256 `4c835f09d646...`)
 - **Headers:** `linux-arxos-headers-7.3.0-1-x86_64.pkg.tar.zst` (42.8 MB, sha256 `e636c94a433a...`)
+- **Mirror:** archived on archive.org
 
 ### linux-arxos-rt 7.2.5-1  (retired)
 
@@ -126,16 +129,16 @@ Newest first. Each entry says what changed against the kernel before it.
 
 | Edition | Version | Released | Status |
 | --- | --- | --- | --- |
-| `slim` | 0.0.1 | 2026-09 | current |
+| `slim` | 0.0.1 | 2026-09 | retired |
 
 Newest first. ISOs live on R2 (primary) and archive.org (mirror); they are
 too large for GitHub Releases.
 
-### ArxOS 0.0.1 (slim)  (current)
+### ArxOS 0.0.1 (slim)  (retired)
 
-- **Base:** Arch (ArxOS tuned)
+- **Base:** ArxOS tuned
 - **Released:** 2026-09
-- **What changed:** First public ArxOS release. Slim image: a lean base with the ArxOS toolkit built in; add the security arsenal on demand with arx after install. linux-arxos 7.2.5-1, zram baked in, DEATHSTROKE installed inert, install-gate verified on real hardware and in VMs.
+- **What changed:** First public ArxOS release. Slim image: a lean base with the ArxOS toolkit built in; add the security arsenal on demand with arx after install. linux-arxos 7.2.5-1, zram baked in. KNOWN ISSUE (fixed in 0.0.2): the login screen can reject the password set during installation. You do not need to reinstall — set a new password from the boot menu (see arxos.uk/docs#recovery), then run arx update. Retired from the Cloudflare R2 CDN on 2026-11-09 and preserved on archive.org; download it there.
 - **Image:** `arxos-0.0.1.iso` (3.93 GB, sha256 `18d87568b4e2...`)
 - **Mirror:** archived on archive.org
 
