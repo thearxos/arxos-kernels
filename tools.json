@@ -54,13 +54,13 @@
     },
     "anonkit": {
       "type": "tool",
-      "current": "7c3733cac152",
-      "sha256": "7b8b4d6b4545541c47ceee2c3a88eccf7f0a1536059753b6638d7f81e9d6b650",
-      "size": 291636,
-      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/anonkit/7c3733cac152/7b8b4d6b4545541c47ceee2c3a88eccf7f0a1536059753b6638d7f81e9d6b650.tar.zst",
+      "current": "5f7126a9450b",
+      "sha256": "4627b78a01a48a33c299f0d6b2b606b040350c94cf34357d3bb5f950a8a44ea2",
+      "size": 5127,
+      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/anonkit/5f7126a9450b/4627b78a01a48a33c299f0d6b2b606b040350c94cf34357d3bb5f950a8a44ea2.tar.zst",
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/anonkit/install.sh",
       "desc": "ArxOS AnonKit (fail-closed Tor anonymity daemon)",
-      "updated": "2026-10-28"
+      "updated": "2026-11-13T23:54:27Z"
     },
     "droidB": {
       "type": "tool",
@@ -83,5 +83,5 @@
       "updated": "2026-09-23"
     }
   },
-  "updated": "2026-11-13T23:50:09Z"
+  "updated": "2026-11-13T23:54:27Z"
 }
