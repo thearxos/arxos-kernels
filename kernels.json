@@ -1,17 +1,17 @@
 {
   "manifest": "arxos-kernels/v1",
-  "updated": "2026-10-28",
+  "updated": "2026-11-13",
   "note": "Public history of every ARXOS kernel. Text only: the patch code and config stay private. Binaries live on Cloudflare R2 (current, fast) and archive.org / GitHub Releases (full history, rollback).",
   "flavors": {
     "linux-arxos": {
       "role": "default daily driver, newest mainline",
       "base": "ArxOS tuned",
-      "current": "7.3.0-1"
+      "current": "7.3.4-1"
     },
     "linux-arxos-rt": {
       "role": "real-time (RF, SDR, wireless capture)",
       "base": "ArxOS tuned",
-      "current": "7.3.0-1"
+      "current": "7.3.4-1"
     },
     "linux-arxos-stable": {
       "role": "retired: the 7.2 stable series reached end of life upstream and gets no more security fixes",
@@ -40,10 +40,60 @@
   "kernels": [
     {
       "flavor": "linux-arxos-rt",
+      "version": "7.3.4-1",
+      "upstream": "Linux 7.3.4",
+      "date": "2026-11",
+      "status": "current",
+      "changes": "Linux 7.3.4, built and published by the ARXOS kernel pipeline: hardening gate GREEN and a boot to userspace with taint 0, lockdown in integrity mode and no kernel warning. Real-time (PREEMPT_RT). Same ARXOS patches and settings as the previous release.",
+      "artifacts": {
+        "kernel": {
+          "file": "linux-arxos-rt-7.3.4-1-x86_64.pkg.tar.zst",
+          "size": 164876617,
+          "sha256": "6f654bf7e6faeee6738973720ce2dc37f5a3943b5b510e0987b28bb099a28238"
+        },
+        "headers": {
+          "file": "linux-arxos-rt-headers-7.3.4-1-x86_64.pkg.tar.zst",
+          "size": 46304924,
+          "sha256": "b53bf07ee89cea116acf771aaffbd74de84eadd24e50a051ffaade645beba035"
+        }
+      },
+      "urls": {
+        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
+        "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-rt-7.3.4-1/",
+        "archive_org": null
+      }
+    },
+    {
+      "flavor": "linux-arxos",
+      "version": "7.3.4-1",
+      "upstream": "Linux 7.3.4",
+      "date": "2026-11",
+      "status": "current",
+      "changes": "Linux 7.3.4, built and published by the ARXOS kernel pipeline: hardening gate GREEN and a boot to userspace with taint 0, lockdown in integrity mode and no kernel warning. Same ARXOS patches and settings as the previous release.",
+      "artifacts": {
+        "kernel": {
+          "file": "linux-arxos-7.3.4-1-x86_64.pkg.tar.zst",
+          "size": 158878023,
+          "sha256": "7d526286b2bb50cf3a7f45d903b11b873743db987e4597fd9e997291dbc300b6"
+        },
+        "headers": {
+          "file": "linux-arxos-headers-7.3.4-1-x86_64.pkg.tar.zst",
+          "size": 44752405,
+          "sha256": "b99c0f53707c4851985ca8effe833cbf50a942b82a6be16029fa4939e0303513"
+        }
+      },
+      "urls": {
+        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
+        "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-7.3.4-1/",
+        "archive_org": null
+      }
+    },
+    {
+      "flavor": "linux-arxos-rt",
       "version": "7.3.0-1",
       "upstream": "Linux 7.3.0",
       "date": "2026-10",
-      "status": "current",
+      "status": "retired",
       "changes": "Real-time (PREEMPT_RT + rt-bore) on the newest mainline, Linux 7.3.0, with the full ARXOS hardening and privacy set carried forward: forced-threaded IRQs, 1000 Hz, lockdown, IMA, strict IOMMU, memory zeroing on allocation and free, live patching, and the kernel-level network privacy additions. No LTO (RT and LTO do not mix). Supersedes the 7.2.5 real-time build.",
       "artifacts": {
         "kernel": {
@@ -58,7 +108,7 @@
         }
       },
       "urls": {
-        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
+        "r2": null,
         "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-rt-7.3.0-1/",
         "archive_org": "https://archive.org/download/arxos-linux-arxos-rt-7.3.0-1/"
       },
@@ -94,7 +144,7 @@
       "version": "7.3.0-1",
       "upstream": "Linux 7.3.0",
       "date": "2026-10",
-      "status": "current",
+      "status": "retired",
       "changes": "Moves the default kernel to the newest mainline, Linux 7.3.0. Keeps the BORE scheduler, ThinLTO, 1000 Hz and the x86-64-v3 baseline with the full ARXOS hardening set (lockdown, IMA, strict IOMMU, memory zeroing on allocation and free, live patching), and adds kernel-level network privacy: link-layer MAC rewrite and filtering, NAT and redirect for the transparent proxy, packet logging for AnonKit, SYN cookies, reverse-path filtering and IPv6 privacy support.",
       "artifacts": {
         "kernel": {
@@ -109,7 +159,7 @@
         }
       },
       "urls": {
-        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
+        "r2": null,
         "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-7.3.0-1/",
         "archive_org": "https://archive.org/download/arxos-linux-arxos-7.3.0-1/"
       },
