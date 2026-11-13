@@ -14,9 +14,9 @@
       "current": "7.3.0-1"
     },
     "linux-arxos-stable": {
-      "role": "default on the stable series, fewer changes",
+      "role": "retired: the 7.2 stable series reached end of life upstream and gets no more security fixes",
       "base": "ArxOS tuned",
-      "current": "7.2.13-1"
+      "current": ""
     }
   },
   "tunes": [
@@ -69,7 +69,7 @@
       "version": "7.2.13-1",
       "upstream": "Linux 7.2.13",
       "date": "2026-10",
-      "status": "current",
+      "status": "retired",
       "changes": "New flavor: the newest release of the stable 7.2 series, Linux 7.2.13, with the same tuning as linux-arxos (BORE scheduler, ThinLTO, 1000 Hz, x86-64-v3), the full ARXOS hardening set and the kernel-level network privacy additions. Choose it when you value fewer changes over the newest features.",
       "artifacts": {
         "kernel": {
@@ -84,7 +84,6 @@
         }
       },
       "urls": {
-        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
         "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-stable-7.2.13-1/",
         "archive_org": "https://archive.org/download/arxos-linux-arxos-stable-7.2.13-1/"
       },

@@ -20,7 +20,7 @@ _Manifests updated 2026-10-28._
 | --- | --- | --- | --- |
 | `linux-arxos` | default daily driver, newest mainline | ArxOS tuned | 7.3.0-1 |
 | `linux-arxos-rt` | real-time (RF, SDR, wireless capture) | ArxOS tuned | 7.3.0-1 |
-| `linux-arxos-stable` | default on the stable series, fewer changes | ArxOS tuned | 7.2.13-1 |
+| `linux-arxos-stable` | retired: the 7.2 stable series reached end of life upstream and gets no more security fixes | ArxOS tuned |  |
 
 ## What ARXOS adds
 
@@ -45,7 +45,7 @@ Newest first. Each entry says what changed against the kernel before it.
 - **Headers:** `linux-arxos-rt-headers-7.3.0-1-x86_64.pkg.tar.zst` (44.3 MB, sha256 `200db849a659...`)
 - **Mirror:** archived on archive.org
 
-### linux-arxos-stable 7.2.13-1  (current)
+### linux-arxos-stable 7.2.13-1  (retired)
 
 - **Upstream base:** Linux 7.2.13
 - **Released:** 2026-10
