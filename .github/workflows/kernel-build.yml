@@ -41,7 +41,7 @@ concurrency:
 
 env:
   AKT_REPO: 0xb0rn3/kernel-builder
-  AKT_REF: b2bb51a0da16e64b45d705dd322a478affd49739
+  AKT_REF: 2b22d7245cb9818b6df53030fc07ac1a8fe6f5ef
 
 jobs:
   check:
@@ -85,7 +85,9 @@ jobs:
             # a flavour that failed is retried once a day, not every four hours: its open failure
             # issue is touched at each failure
             if [ "$FORCE" != true ] && [ "$GITHUB_EVENT_NAME" = schedule ]; then
-              last=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label build-failure --search "\"$tag\" in:title" --json updatedAt --jq '.[0].updatedAt // empty')
+              # exact title: search is fuzzy, and linux-arxos is a prefix of the other two names
+              last=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label build-failure --limit 100 --json title,updatedAt \
+                     --jq ".[] | select(.title == \"Kernel build failed: $tag\") | .updatedAt" | head -n1)
               if [ -n "$last" ] && [ $(( $(date +%s) - $(date -d "$last" +%s) )) -lt 72000 ]; then
                 echo "$tag: failed less than 20 h ago (issue open), not retried yet"; continue
               fi
@@ -347,8 +349,11 @@ jobs:
           bad=0
           for p in $(jq -r '.include[].package' <<<"$MATRIX"); do
             tag="$p-$VERSION-$PKGREL"; title="Kernel build failed: $tag"
-            n=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label build-failure --search "\"$tag\" in:title" --json number --jq '.[0].number // empty')
-            if grep -qw -- "$p" <<<" $RELEASED "; then
+            n=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label build-failure --limit 100 --json title,number \
+                --jq ".[] | select(.title == \"$title\") | .number" | head -n1)
+            # whole names only: grep -w would find linux-arxos inside linux-arxos-rt
+            released=0; for r in $RELEASED; do [ "$r" = "$p" ] && released=1; done
+            if [ "$released" = 1 ]; then
               [ -n "$n" ] && gh issue close "$n" --repo "$GITHUB_REPOSITORY" --comment "Built, gated, boot-tested and released: $RUN_URL"
               continue
             fi
