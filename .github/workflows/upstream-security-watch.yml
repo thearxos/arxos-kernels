@@ -1,14 +1,14 @@
 name: upstream kernel security watch
 
-# ArxOS ships a CUSTOM kernel (linux-arxos), so it does not get upstream security point-releases
-# automatically the way a stock Arch kernel does - someone has to rebuild it. This watches
-# kernel.org and opens an issue the moment the published linux-arxos falls behind the current stable
-# branch, so a kernel security fix is never missed. It does NOT build anything (a kernel build is
-# hours and needs the host); it only raises the signal to rebuild and republish.
+# The watchdog over the automatic kernel pipeline. kernel-build.yml builds every flavour when
+# kernel.org releases, and the private publisher puts it on R2 and in kernels.json. This checks the
+# result once a day: when any current flavour (linux-arxos, -rt, -zen) is behind kernel.org's latest
+# stable, or sits on a branch upstream marked end of life, it opens (or updates) one issue; when all
+# are caught up again it closes that issue. It builds nothing. Actions are pinned to commits.
 
 on:
   schedule:
-    - cron: '17 6 * * 1'   # every Monday, 06:17 UTC
+    - cron: '17 6 * * *'   # every day, 06:17 UTC
   workflow_dispatch:
 
 permissions:
@@ -17,10 +17,10 @@ permissions:
 
 jobs:
   watch:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - name: Compare published linux-arxos against upstream stable
-        uses: actions/github-script@v7
+      - name: Compare every published flavour with upstream stable
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b  # v7
         with:
           script: |
             const up = await (await fetch('https://www.kernel.org/releases.json')).json();
@@ -39,26 +39,34 @@ jobs:
 
             // the newest published build of each shipped flavor that is marked current
             const current = (ours.kernels || []).filter(k => k.status === 'current');
-            const def = current.find(k => k.flavor === 'linux-arxos');
-            const stab = current.find(k => k.flavor === 'linux-arxos-stable');
-
             const problems = [];
-            if (def && cmp(stable, def.version) > 0)
-              problems.push(`**linux-arxos** is ${def.version} but upstream stable is **${stable}** (behind, security fixes pending). Rebuild with \`akt build\` (rolling latest) and republish.`);
+            if (!current.some(k => k.flavor === 'linux-arxos'))
+              problems.push('**linux-arxos** has no current release in kernels.json.');
+            for (const k of current) {
+              if (cmp(stable, k.version) > 0)
+                problems.push(`**${k.flavor}** is ${k.version} but upstream stable is **${stable}** (behind, security fixes pending). kernel-build.yml builds it on its next run; if this issue stays open past a day, look at the open \`build-failure\` issues and the kernel-build runs.`);
+            }
             for (const k of current) {
               const branch = k.version.split('.').slice(0,2).join('.');
               if (eolBranches.has(branch))
                 problems.push(`**${k.flavor}** ${k.version} is on branch ${branch}.x, which upstream has marked **END OF LIFE** - it gets no more security fixes. Move it to the current stable or an LTS longterm branch.`);
             }
 
+            const open = (await github.rest.issues.listForRepo({ owner: context.repo.owner, repo: context.repo.repo, state: 'open', labels: 'kernel-security' })).data;
             if (!problems.length) {
-              core.info(`up to date: linux-arxos ${def ? def.version : '?'} vs upstream stable ${stable}`);
+              const have = current.map(k => `${k.flavor} ${k.version}`).join(', ');
+              core.info(`up to date with upstream stable ${stable}: ${have}`);
+              for (const i of open) {
+                await github.rest.issues.createComment({ owner: context.repo.owner, repo: context.repo.repo, issue_number: i.number, body: `Caught up: ${have} (upstream stable ${stable}).` });
+                await github.rest.issues.update({ owner: context.repo.owner, repo: context.repo.repo, issue_number: i.number, state: 'closed' });
+                core.notice(`closed issue #${i.number}`);
+              }
               return;
             }
 
             const title = `kernel security: linux-arxos behind upstream (stable ${stable})`;
-            const body = [`Upstream stable is **${stable}**. Published ArxOS kernels need attention so users keep receiving official Linux security patches:\n`, ...problems.map(p => `- ${p}`), `\n_Raised automatically by upstream-security-watch; rebuild on the host (akt), gate, boot-test, then publish to R2 + kernels.json so \`arx update\` delivers it._`].join('\n');
-            const existing = (await github.rest.issues.listForRepo({ owner: context.repo.owner, repo: context.repo.repo, state: 'open', labels: 'kernel-security' })).data[0];
+            const body = [`Upstream stable is **${stable}**. Published ArxOS kernels need attention so users keep receiving official Linux security patches:\n`, ...problems.map(p => `- ${p}`), `\n_Raised automatically by upstream-security-watch. Kernels build, gate, boot-test and publish by themselves (kernel-build.yml, then the publisher); this issue closes itself when every flavour is caught up._`].join('\n');
+            const existing = open[0];
             if (existing) {
               await github.rest.issues.update({ owner: context.repo.owner, repo: context.repo.repo, issue_number: existing.number, title, body });
               core.notice(`updated issue #${existing.number}`);
