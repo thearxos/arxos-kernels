@@ -276,6 +276,8 @@ jobs:
           MATRIX: ${{ needs.check.outputs.matrix }}
         run: |
           set -euo pipefail
+          # when every flavour failed before uploading, nothing was downloaded and dl/ does not exist
+          mkdir -p dl
           released=""; failed=""
           for p in $(jq -r '.include[].package' <<<"$MATRIX"); do
             out="out-$p"; mkdir "$out"; ok=1
