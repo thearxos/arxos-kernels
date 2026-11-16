@@ -180,7 +180,7 @@ jobs:
               grep -q "GREEN" /out/${PACKAGE}-gate.txt
               # fragment lines this kernel was built without: a required one would have stopped akt
               # before compiling; optional ones (a renamed driver option) are reported, not fatal
-              /workspace/target/release/akt fragment "$cfg" --flavor "$KERNEL_FLAVOR" | tee /out/${PACKAGE}-fragment.txt
+              AKT_DATA_DIR=/workspace /workspace/target/release/akt fragment "$cfg" --flavor "$KERNEL_FLAVOR" | tee /out/${PACKAGE}-fragment.txt
             '
           sudo chown -R "$(id -u):$(id -g)" artifacts
           ls -la artifacts
