@@ -41,7 +41,7 @@ concurrency:
 
 env:
   AKT_REPO: 0xb0rn3/kernel-builder
-  AKT_REF: 2b22d7245cb9818b6df53030fc07ac1a8fe6f5ef
+  AKT_REF: ccc2dd49851e05a171af6e9d0e883037b13f4873
 
 jobs:
   check:
@@ -178,6 +178,9 @@ jobs:
               cfg=$(find /tmp/cfg -name .config -print -quit)
               /workspace/target/release/akt gate "$cfg" | tee /out/${PACKAGE}-gate.txt
               grep -q "GREEN" /out/${PACKAGE}-gate.txt
+              # fragment lines this kernel was built without: a required one would have stopped akt
+              # before compiling; optional ones (a renamed driver option) are reported, not fatal
+              /workspace/target/release/akt fragment "$cfg" --flavor "$KERNEL_FLAVOR" | tee /out/${PACKAGE}-fragment.txt
             '
           sudo chown -R "$(id -u):$(id -g)" artifacts
           ls -la artifacts
@@ -264,6 +267,7 @@ jobs:
     outputs:
       released: ${{ steps.rel.outputs.released }}
       failed: ${{ steps.rel.outputs.failed }}
+      drift: ${{ steps.rel.outputs.drift }}
     steps:
       - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333  # v8.0.2
         with:
@@ -278,7 +282,7 @@ jobs:
           set -euo pipefail
           # when every flavour failed before uploading, nothing was downloaded and dl/ does not exist
           mkdir -p dl
-          released=""; failed=""
+          released=""; failed=""; drift=""
           for p in $(jq -r '.include[].package' <<<"$MATRIX"); do
             out="out-$p"; mkdir "$out"; ok=1
             for f in "$p-$VERSION-$PKGREL-x86_64.pkg.tar.zst" "$p-headers-$VERSION-$PKGREL-x86_64.pkg.tar.zst" "$p-gate.txt" "$p-boot.log"; do
@@ -292,11 +296,16 @@ jobs:
             if [ "$ok" = 1 ]; then
               (cd "$out" && sha256sum *.pkg.tar.zst > SHA256SUMS && cat SHA256SUMS)
               released="$released $p"
+              fr=$(find dl -name "$p-fragment.txt" -print -quit)
+              if [ -n "$fr" ]; then
+                cp "$fr" "$out/"
+                grep -q '^optional ' "$fr" && drift="$drift $p"
+              fi
             else
               rm -rf "$out"; failed="$failed $p"
             fi
           done
-          echo "released=${released# }" >> "$GITHUB_OUTPUT"; echo "failed=${failed# }" >> "$GITHUB_OUTPUT"
+          echo "released=${released# }" >> "$GITHUB_OUTPUT"; echo "failed=${failed# }" >> "$GITHUB_OUTPUT"; echo "drift=${drift# }" >> "$GITHUB_OUTPUT"
           echo "complete: ${released:-none} | failed: ${failed:-none}" | tee -a "$GITHUB_STEP_SUMMARY"
       - name: Attest where the packages were built
         if: steps.rel.outputs.released != ''
@@ -321,6 +330,11 @@ jobs:
               echo "It passed the hardening gate and a boot that reached userspace with taint 0, lockdown in integrity mode and no warning in the kernel log (log attached). The packages carry a build provenance attestation from this repository's workflow."
               echo
               echo "Source commit: \`${RECIPE}\`. Verify a download against \`SHA256SUMS\` before installing. Install it with: \`arx kernel install $p\`."
+              if [ -f "$out/$p-fragment.txt" ] && grep -q '^optional ' "$out/$p-fragment.txt"; then
+                echo
+                echo "Built without these optional settings, which this Linux release no longer accepts (no protection depends on them; see \`$p-fragment.txt\`):"
+                grep '^optional ' "$out/$p-fragment.txt" | sed 's/^optional /- /'
+              fi
             } > notes.md
             if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
               gh release upload "$tag" "$out"/* --clobber --repo "$GITHUB_REPOSITORY"
@@ -344,6 +358,7 @@ jobs:
           PKGREL: ${{ inputs.pkgrel || '1' }}
           MATRIX: ${{ needs.check.outputs.matrix }}
           RELEASED: ${{ needs.release.outputs.released }}
+          DRIFT: ${{ needs.release.outputs.drift }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           set -euo pipefail
@@ -364,4 +379,13 @@ jobs:
             if [ -n "$n" ]; then gh issue comment "$n" --repo "$GITHUB_REPOSITORY" --body "Failed again: $RUN_URL"
             else gh issue create --repo "$GITHUB_REPOSITORY" --title "$title" --label build-failure --body "$body"; fi
           done
+          # optional fragment settings a kernel was released without: one issue, never a failed run
+          if [ -n "${DRIFT:-}" ]; then
+            gh label create fragment-drift --repo "$GITHUB_REPOSITORY" --color FBCA04 --description "A kernel was built without an optional config setting" 2>/dev/null || true
+            title="Kernel config drift: $VERSION-$PKGREL"
+            n=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label fragment-drift --limit 100 --json title,number \
+                --jq ".[] | select(.title == \"$title\") | .number" | head -n1)
+            body="Released, but without optional settings that Linux $VERSION no longer accepts as written (renamed, removed, or a dependency gone): ${DRIFT}. No protection depends on them. Each release lists them in its \`*-fragment.txt\`. Update config/arxos.fragment in the kernel builder. Run: $RUN_URL"
+            if [ -z "$n" ]; then gh issue create --repo "$GITHUB_REPOSITORY" --title "$title" --label fragment-drift --body "$body"; fi
+          fi
           exit $bad
