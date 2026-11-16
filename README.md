@@ -12,7 +12,7 @@ Binaries are hosted in more than one place so nothing ever disappears:
 - **GitHub Releases** — every kernel version (ISOs are too large for Releases).
 - **archive.org** — a durable mirror of every kernel and ISO, for the long haul.
 
-_Manifests updated 2026-11-13._
+_Manifests updated 2026-11-16._
 
 ## Kernels
 
@@ -20,6 +20,7 @@ _Manifests updated 2026-11-13._
 | --- | --- | --- | --- |
 | `linux-arxos` | default daily driver, newest mainline | ArxOS tuned | 7.3.4-1 |
 | `linux-arxos-rt` | real-time (RF, SDR, wireless capture) | ArxOS tuned | 7.3.4-1 |
+| `linux-arxos-zen` | gaming: huge pages always, NTSYNC built in for Windows games, sched-ext schedulers | ArxOS tuned | 7.3.4-1 |
 | `linux-arxos-stable` | retired: the 7.2 stable series reached end of life upstream and gets no more security fixes | ArxOS tuned |  |
 
 ## What ARXOS adds
@@ -36,6 +37,14 @@ Each one is here for a reason, not for a spec sheet:
 
 Newest first. Each entry says what changed against the kernel before it.
 
+### linux-arxos-zen 7.3.4-1  (current)
+
+- **Upstream base:** Linux 7.3.4
+- **Released:** 2026-11
+- **What changed:** Linux 7.3.4, built and published by the ARXOS kernel pipeline: hardening gate GREEN and a boot to userspace with taint 0, lockdown in integrity mode and no kernel warning. Gaming: huge pages always, NTSYNC built in, sched-ext. Same ARXOS patches and settings as the previous release.
+- **Kernel:** `linux-arxos-zen-7.3.4-1-x86_64.pkg.tar.zst` (151.5 MB, sha256 `5ad66a102314...`)
+- **Headers:** `linux-arxos-zen-headers-7.3.4-1-x86_64.pkg.tar.zst` (42.7 MB, sha256 `ab599bf3acbf...`)
+
 ### linux-arxos-rt 7.3.4-1  (current)
 
 - **Upstream base:** Linux 7.3.4
@@ -43,6 +52,7 @@ Newest first. Each entry says what changed against the kernel before it.
 - **What changed:** Linux 7.3.4, built and published by the ARXOS kernel pipeline: hardening gate GREEN and a boot to userspace with taint 0, lockdown in integrity mode and no kernel warning. Real-time (PREEMPT_RT). Same ARXOS patches and settings as the previous release.
 - **Kernel:** `linux-arxos-rt-7.3.4-1-x86_64.pkg.tar.zst` (157.2 MB, sha256 `6f654bf7e6fa...`)
 - **Headers:** `linux-arxos-rt-headers-7.3.4-1-x86_64.pkg.tar.zst` (44.2 MB, sha256 `b53bf07ee89c...`)
+- **Mirror:** archived on archive.org
 
 ### linux-arxos 7.3.4-1  (current)
 
@@ -51,6 +61,7 @@ Newest first. Each entry says what changed against the kernel before it.
 - **What changed:** Linux 7.3.4, built and published by the ARXOS kernel pipeline: hardening gate GREEN and a boot to userspace with taint 0, lockdown in integrity mode and no kernel warning. Same ARXOS patches and settings as the previous release.
 - **Kernel:** `linux-arxos-7.3.4-1-x86_64.pkg.tar.zst` (151.5 MB, sha256 `7d526286b2bb...`)
 - **Headers:** `linux-arxos-headers-7.3.4-1-x86_64.pkg.tar.zst` (42.7 MB, sha256 `b99c0f53707c...`)
+- **Mirror:** archived on archive.org
 
 ### linux-arxos-rt 7.3.0-1  (retired)
 

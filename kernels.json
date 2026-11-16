@@ -1,6 +1,6 @@
 {
   "manifest": "arxos-kernels/v1",
-  "updated": "2026-11-13",
+  "updated": "2026-11-16",
   "note": "Public history of every ARXOS kernel. Text only: the patch code and config stay private. Binaries live on Cloudflare R2 (current, fast) and archive.org / GitHub Releases (full history, rollback).",
   "flavors": {
     "linux-arxos": {
@@ -16,7 +16,7 @@
     "linux-arxos-zen": {
       "role": "gaming: huge pages always, NTSYNC built in for Windows games, sched-ext schedulers",
       "base": "ArxOS tuned",
-      "current": ""
+      "current": "7.3.4-1"
     },
     "linux-arxos-stable": {
       "role": "retired: the 7.2 stable series reached end of life upstream and gets no more security fixes",
@@ -43,6 +43,31 @@
     }
   ],
   "kernels": [
+    {
+      "flavor": "linux-arxos-zen",
+      "version": "7.3.4-1",
+      "upstream": "Linux 7.3.4",
+      "date": "2026-11",
+      "status": "current",
+      "changes": "Linux 7.3.4, built and published by the ARXOS kernel pipeline: hardening gate GREEN and a boot to userspace with taint 0, lockdown in integrity mode and no kernel warning. Gaming: huge pages always, NTSYNC built in, sched-ext. Same ARXOS patches and settings as the previous release.",
+      "artifacts": {
+        "kernel": {
+          "file": "linux-arxos-zen-7.3.4-1-x86_64.pkg.tar.zst",
+          "size": 158858843,
+          "sha256": "5ad66a10231446f99163ea9f3b680504ba0a462b8c6b501ffc1756cab00b184f"
+        },
+        "headers": {
+          "file": "linux-arxos-zen-headers-7.3.4-1-x86_64.pkg.tar.zst",
+          "size": 44764332,
+          "sha256": "ab599bf3acbf51212123dc9844d84c21f74ba785d8ccae72b3ddda433ae03dc5"
+        }
+      },
+      "urls": {
+        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
+        "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-zen-7.3.4-1/",
+        "archive_org": null
+      }
+    },
     {
       "flavor": "linux-arxos-rt",
       "version": "7.3.4-1",
