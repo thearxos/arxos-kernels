@@ -10,6 +10,13 @@ name: Build ARXOS kernels when upstream releases
 #
 # akt (the kernel builder, github.com/0xb0rn3/kernel-builder) is pinned to one commit, so a
 # change to the tool reaches the kernels only when this file is updated on purpose.
+#
+# Three flavours: linux-arxos (daily), linux-arxos-rt (real time), linux-arxos-zen (gaming). Only
+# the flavours with no release for the upstream version are built, each flavour is released by
+# itself (one failing never holds back the others), and every released package gets a build
+# provenance attestation that the publisher verifies before anything reaches users. A failed
+# flavour opens an issue here, is retried once a day, and the issue closes when it builds.
+# Jobs get the least access they need; every action is pinned to a commit.
 
 on:
   schedule:
@@ -26,7 +33,7 @@ on:
         default: "1"
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: kernel-build
@@ -34,7 +41,7 @@ concurrency:
 
 env:
   AKT_REPO: 0xb0rn3/kernel-builder
-  AKT_REF: 1bb8c3b052928e03a05d8bc5d9e0f8a85f81ab81
+  AKT_REF: 2b22d7245cb9818b6df53030fc07ac1a8fe6f5ef
 
 jobs:
   check:
@@ -44,12 +51,14 @@ jobs:
       version: ${{ steps.up.outputs.version }}
       recipe: ${{ steps.up.outputs.recipe }}
       build: ${{ steps.up.outputs.build }}
+      matrix: ${{ steps.up.outputs.matrix }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           repository: ${{ env.AKT_REPO }}
           ref: ${{ env.AKT_REF }}
           path: akt
+          persist-credentials: false
       - name: Build akt
         working-directory: akt
         run: cargo build --release --locked
@@ -65,13 +74,31 @@ jobs:
           json=$(./akt/target/release/akt upstream --json)
           version=$(jq -r .version <<<"$json"); recipe=$(jq -r .recipe <<<"$json")
           [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ && "$recipe" =~ ^[0-9a-f]{40}$ ]] || { echo "unexpected upstream answer: $json" >&2; exit 1; }
-          build=false
-          for p in linux-arxos linux-arxos-rt; do
-            gh release view "$p-$version-$PKGREL" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1 || build=true
+          # flavour : kernel name : package
+          all="default:arxos:linux-arxos rt:arxos-rt:linux-arxos-rt zen:arxos-zen:linux-arxos-zen"
+          rows=()
+          for f in $all; do
+            IFS=: read -r flavor kname p <<<"$f"; tag="$p-$version-$PKGREL"
+            if [ "$FORCE" != true ] && gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+              echo "$tag: released"; continue
+            fi
+            # a flavour that failed is retried once a day, not every four hours: its open failure
+            # issue is touched at each failure
+            if [ "$FORCE" != true ] && [ "$GITHUB_EVENT_NAME" = schedule ]; then
+              # exact title: search is fuzzy, and linux-arxos is a prefix of the other two names
+              last=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label build-failure --limit 100 --json title,updatedAt \
+                     --jq ".[] | select(.title == \"Kernel build failed: $tag\") | .updatedAt" | head -n1)
+              if [ -n "$last" ] && [ $(( $(date +%s) - $(date -d "$last" +%s) )) -lt 72000 ]; then
+                echo "$tag: failed less than 20 h ago (issue open), not retried yet"; continue
+              fi
+            fi
+            rows+=("{\"flavor\":\"$flavor\",\"kname\":\"$kname\",\"package\":\"$p\"}")
+            echo "$tag: to build"
           done
-          [ "$FORCE" = true ] && build=true
-          { echo "version=$version"; echo "recipe=$recipe"; echo "build=$build"; } >> "$GITHUB_OUTPUT"
-          echo "upstream $version (source $recipe), releases $version-$PKGREL: build=$build" | tee -a "$GITHUB_STEP_SUMMARY"
+          build=false; [ ${#rows[@]} -gt 0 ] && build=true
+          matrix="{\"include\":[$(IFS=,; echo "${rows[*]}")]}"
+          { echo "version=$version"; echo "recipe=$recipe"; echo "build=$build"; echo "matrix=$matrix"; } >> "$GITHUB_OUTPUT"
+          echo "upstream $version (source $recipe): build=$build $matrix" | tee -a "$GITHUB_STEP_SUMMARY"
 
   build:
     name: Build ${{ matrix.package }}
@@ -81,14 +108,7 @@ jobs:
     timeout-minutes: 355
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - flavor: default
-            kname: arxos
-            package: linux-arxos
-          - flavor: rt
-            kname: arxos-rt
-            package: linux-arxos-rt
+      matrix: ${{ fromJSON(needs.check.outputs.matrix) }}
     env:
       KERNEL_FLAVOR: ${{ matrix.flavor }}
       KERNEL_NAME: ${{ matrix.kname }}
@@ -97,14 +117,16 @@ jobs:
       VERSION: ${{ needs.check.outputs.version }}
       PKGREL: ${{ inputs.pkgrel || '1' }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           path: kernels
-      - uses: actions/checkout@v6
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           repository: ${{ env.AKT_REPO }}
           ref: ${{ env.AKT_REF }}
           path: akt
+          persist-credentials: false
 
       - name: The published patches are the ones akt applies
         run: |
@@ -217,11 +239,12 @@ jobs:
           grep -aqx "KBOOT taint=0" "$res" || { grep -a -E "$splat" "$log" | head; echo "the kernel is tainted" >&2; exit 1; }
           grep -aqx "KBOOT lockdown=none \[integrity\] confidentiality" "$res" || { echo "lockdown is not in integrity mode" >&2; exit 1; }
           if grep -a -E "$splat" "$log"; then echo "the kernel log holds a warning" >&2; exit 1; fi
-          echo "PASS: ${PACKAGE} ${VERSION}-${PKGREL} boots with taint 0, lockdown integrity, no warnings" | tee -a "$GITHUB_STEP_SUMMARY"
+          # the release job publishes a flavour only when this marker exists
+          echo "PASS: ${PACKAGE} ${VERSION}-${PKGREL} boots with taint 0, lockdown integrity, no warnings" | tee "artifacts/${PACKAGE}-verified.txt" | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Upload the packages
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
         with:
           name: ${{ matrix.package }}
           path: artifacts/
@@ -231,31 +254,69 @@ jobs:
   release:
     name: Publish the releases
     needs: [check, build]
+    # every flavour that built is released, also when another flavour failed
+    if: always() && needs.check.outputs.build == 'true'
     runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+    outputs:
+      released: ${{ steps.rel.outputs.released }}
+      failed: ${{ steps.rel.outputs.failed }}
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333  # v8.0.2
         with:
           path: dl
+      - name: Collect the flavours that are complete
+        id: rel
+        env:
+          VERSION: ${{ needs.check.outputs.version }}
+          PKGREL: ${{ inputs.pkgrel || '1' }}
+          MATRIX: ${{ needs.check.outputs.matrix }}
+        run: |
+          set -euo pipefail
+          released=""; failed=""
+          for p in $(jq -r '.include[].package' <<<"$MATRIX"); do
+            out="out-$p"; mkdir "$out"; ok=1
+            for f in "$p-$VERSION-$PKGREL-x86_64.pkg.tar.zst" "$p-headers-$VERSION-$PKGREL-x86_64.pkg.tar.zst" "$p-gate.txt" "$p-boot.log"; do
+              src=$(find dl -name "$f" -print -quit)
+              if [ -n "$src" ]; then cp "$src" "$out/"; else echo "$p: missing $f"; ok=0; fi
+            done
+            # a flavour is complete only when its gate was green and its boot test passed
+            grep -q "GREEN" "$out/$p-gate.txt" 2>/dev/null || ok=0
+            v=$(find dl -name "$p-verified.txt" -print -quit)
+            { [ -n "$v" ] && grep -q "^PASS: $p $VERSION-$PKGREL " "$v"; } || { echo "$p: no boot pass recorded"; ok=0; }
+            if [ "$ok" = 1 ]; then
+              (cd "$out" && sha256sum *.pkg.tar.zst > SHA256SUMS && cat SHA256SUMS)
+              released="$released $p"
+            else
+              rm -rf "$out"; failed="$failed $p"
+            fi
+          done
+          echo "released=${released# }" >> "$GITHUB_OUTPUT"; echo "failed=${failed# }" >> "$GITHUB_OUTPUT"
+          echo "complete: ${released:-none} | failed: ${failed:-none}" | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Attest where the packages were built
+        if: steps.rel.outputs.released != ''
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8  # v4.2.2
+        with:
+          subject-path: out-*/*.pkg.tar.zst
       - name: One release per flavour
+        if: steps.rel.outputs.released != ''
         env:
           GH_TOKEN: ${{ github.token }}
           VERSION: ${{ needs.check.outputs.version }}
           RECIPE: ${{ needs.check.outputs.recipe }}
           PKGREL: ${{ inputs.pkgrel || '1' }}
+          RELEASED: ${{ steps.rel.outputs.released }}
         run: |
           set -euo pipefail
-          for p in linux-arxos linux-arxos-rt; do
-            out="out-$p"; mkdir "$out"
-            for f in "$p-$VERSION-$PKGREL-x86_64.pkg.tar.zst" "$p-headers-$VERSION-$PKGREL-x86_64.pkg.tar.zst" "$p-gate.txt" "$p-boot.log"; do
-              src=$(find "dl/$p" -name "$f" -print -quit); test -n "$src" || { echo "missing $f" >&2; exit 1; }
-              cp "$src" "$out/"
-            done
-            (cd "$out" && sha256sum *.pkg.tar.zst > SHA256SUMS && cat SHA256SUMS)
-            tag="$p-$VERSION-$PKGREL"
+          for p in $RELEASED; do
+            out="out-$p"; tag="$p-$VERSION-$PKGREL"
             {
               echo "$p $VERSION-$PKGREL, built from Linux $VERSION by akt ${AKT_REF::7}."
               echo
-              echo "It passed the hardening gate and a boot that reached userspace with taint 0, lockdown in integrity mode and no warning in the kernel log (log attached)."
+              echo "It passed the hardening gate and a boot that reached userspace with taint 0, lockdown in integrity mode and no warning in the kernel log (log attached). The packages carry a build provenance attestation from this repository's workflow."
               echo
               echo "Source commit: \`${RECIPE}\`. Verify a download against \`SHA256SUMS\` before installing. Install it with: \`arx kernel install $p\`."
             } > notes.md
@@ -266,3 +327,39 @@ jobs:
                 --title "$p $VERSION-$PKGREL" --notes-file notes.md --latest=false
             fi
           done
+
+  report:
+    name: Tell people when a flavour did not build
+    needs: [check, build, release]
+    if: always() && needs.check.outputs.build == 'true'
+    runs-on: ubuntu-24.04
+    permissions:
+      issues: write
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.check.outputs.version }}
+          PKGREL: ${{ inputs.pkgrel || '1' }}
+          MATRIX: ${{ needs.check.outputs.matrix }}
+          RELEASED: ${{ needs.release.outputs.released }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          gh label create build-failure --repo "$GITHUB_REPOSITORY" --color B60205 --description "A kernel flavour did not build, gate or boot" 2>/dev/null || true
+          bad=0
+          for p in $(jq -r '.include[].package' <<<"$MATRIX"); do
+            tag="$p-$VERSION-$PKGREL"; title="Kernel build failed: $tag"
+            n=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --label build-failure --limit 100 --json title,number \
+                --jq ".[] | select(.title == \"$title\") | .number" | head -n1)
+            # whole names only: grep -w would find linux-arxos inside linux-arxos-rt
+            released=0; for r in $RELEASED; do [ "$r" = "$p" ] && released=1; done
+            if [ "$released" = 1 ]; then
+              [ -n "$n" ] && gh issue close "$n" --repo "$GITHUB_REPOSITORY" --comment "Built, gated, boot-tested and released: $RUN_URL"
+              continue
+            fi
+            bad=1
+            body="$tag did not complete (build, hardening gate or boot test). Users stay on the previous kernel until it does. Run: $RUN_URL. It is retried once a day; this issue closes by itself when it builds."
+            if [ -n "$n" ]; then gh issue comment "$n" --repo "$GITHUB_REPOSITORY" --body "Failed again: $RUN_URL"
+            else gh issue create --repo "$GITHUB_REPOSITORY" --title "$title" --label build-failure --body "$body"; fi
+          done
+          exit $bad
