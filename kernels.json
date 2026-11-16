@@ -13,6 +13,11 @@
       "base": "ArxOS tuned",
       "current": "7.3.4-1"
     },
+    "linux-arxos-zen": {
+      "role": "gaming: huge pages always, NTSYNC built in for Windows games, sched-ext schedulers",
+      "base": "ArxOS tuned",
+      "current": ""
+    },
     "linux-arxos-stable": {
       "role": "retired: the 7.2 stable series reached end of life upstream and gets no more security fixes",
       "base": "ArxOS tuned",
