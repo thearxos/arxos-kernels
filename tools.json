@@ -14,13 +14,13 @@
     },
     "arx": {
       "type": "core",
-      "current": "0.1.11",
-      "sha256": "6300099f385187727b8c5541e2b9ee6a68290dafb4b5524726d9fd2d771ad3f5",
-      "size": 18830804,
-      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arx/0.1.11/6300099f385187727b8c5541e2b9ee6a68290dafb4b5524726d9fd2d771ad3f5.tar.zst",
+      "current": "0.1.11-1",
+      "sha256": "bdf64c9ac5106c75a6dec18e8f966f718c96c95380339a126f12a3e2f0f7111e",
+      "size": 18837044,
+      "tarball": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arx/0.1.11-1/bdf64c9ac5106c75a6dec18e8f966f718c96c95380339a126f12a3e2f0f7111e.tar.zst",
       "installer": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/tools/arx/install.sh",
       "desc": "Native package manager + system orchestrator (pacman's read-only flags are pacman's, byte for byte)",
-      "updated": "2026-11-16T21:56:31Z"
+      "updated": "2026-11-16T22:29:00Z"
     },
     "arxupd": {
       "type": "core",
@@ -83,5 +83,5 @@
       "updated": "2026-09-23"
     }
   },
-  "updated": "2026-11-16T22:00:34Z"
+  "updated": "2026-11-16T22:29:00Z"
 }
