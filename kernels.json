@@ -1,22 +1,22 @@
 {
   "manifest": "arxos-kernels/v1",
-  "updated": "2026-11-16",
+  "updated": "2026-11-18",
   "note": "Public history of every ARXOS kernel. Text only: the patch code and config stay private. Binaries live on Cloudflare R2 (current, fast) and archive.org / GitHub Releases (full history, rollback).",
   "flavors": {
     "linux-arxos": {
       "role": "default daily driver, newest mainline",
       "base": "ArxOS tuned",
-      "current": "7.3.4-1"
+      "current": "7.3.5-1"
     },
     "linux-arxos-rt": {
       "role": "real-time (RF, SDR, wireless capture)",
       "base": "ArxOS tuned",
-      "current": "7.3.4-1"
+      "current": "7.3.5-1"
     },
     "linux-arxos-zen": {
       "role": "gaming: huge pages always, NTSYNC built in for Windows games, sched-ext schedulers",
       "base": "ArxOS tuned",
-      "current": "7.3.4-1"
+      "current": "7.3.5-1"
     },
     "linux-arxos-stable": {
       "role": "retired: the 7.2 stable series reached end of life upstream and gets no more security fixes",
@@ -45,10 +45,85 @@
   "kernels": [
     {
       "flavor": "linux-arxos-zen",
+      "version": "7.3.5-1",
+      "upstream": "Linux 7.3.5",
+      "date": "2026-11",
+      "status": "current",
+      "changes": "Linux 7.3.5, built and published by the ARXOS kernel pipeline: hardening gate GREEN and a boot to userspace with taint 0, lockdown in integrity mode and no kernel warning. Gaming: huge pages always, NTSYNC built in, sched-ext. Same ARXOS patches and settings as the previous release.",
+      "artifacts": {
+        "kernel": {
+          "file": "linux-arxos-zen-7.3.5-1-x86_64.pkg.tar.zst",
+          "size": 158950641,
+          "sha256": "8beb3dce58809d7b9b86a7f965c14686cf5d332cca67a69b7d3f91655e14d359"
+        },
+        "headers": {
+          "file": "linux-arxos-zen-headers-7.3.5-1-x86_64.pkg.tar.zst",
+          "size": 44785150,
+          "sha256": "7ae86ce5051448a4b6dbd0be3010806d8c6b932694704d7d4be28ae4b0f7b421"
+        }
+      },
+      "urls": {
+        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
+        "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-zen-7.3.5-1/",
+        "archive_org": null
+      }
+    },
+    {
+      "flavor": "linux-arxos-rt",
+      "version": "7.3.5-1",
+      "upstream": "Linux 7.3.5",
+      "date": "2026-11",
+      "status": "current",
+      "changes": "Linux 7.3.5, built and published by the ARXOS kernel pipeline: hardening gate GREEN and a boot to userspace with taint 0, lockdown in integrity mode and no kernel warning. Real-time (PREEMPT_RT). Same ARXOS patches and settings as the previous release.",
+      "artifacts": {
+        "kernel": {
+          "file": "linux-arxos-rt-7.3.5-1-x86_64.pkg.tar.zst",
+          "size": 164912248,
+          "sha256": "430b71f632c2cea2e0bdfb7fde7b8a8bdbab797db235ff8fefdb731ed311bad2"
+        },
+        "headers": {
+          "file": "linux-arxos-rt-headers-7.3.5-1-x86_64.pkg.tar.zst",
+          "size": 46316663,
+          "sha256": "75dd6ede031561988e5d17c4f88173461a05a187b884ed55f9388f22784fe5b9"
+        }
+      },
+      "urls": {
+        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
+        "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-rt-7.3.5-1/",
+        "archive_org": null
+      }
+    },
+    {
+      "flavor": "linux-arxos",
+      "version": "7.3.5-1",
+      "upstream": "Linux 7.3.5",
+      "date": "2026-11",
+      "status": "current",
+      "changes": "Linux 7.3.5, built and published by the ARXOS kernel pipeline: hardening gate GREEN and a boot to userspace with taint 0, lockdown in integrity mode and no kernel warning. Same ARXOS patches and settings as the previous release.",
+      "artifacts": {
+        "kernel": {
+          "file": "linux-arxos-7.3.5-1-x86_64.pkg.tar.zst",
+          "size": 158965570,
+          "sha256": "3dc847e394fd70fe880a5392beac7424fb6294af076033dbae9aa972308a3cd9"
+        },
+        "headers": {
+          "file": "linux-arxos-headers-7.3.5-1-x86_64.pkg.tar.zst",
+          "size": 44778525,
+          "sha256": "659e469ae85b837411df36fbb0b4b6a3f3bdffd908385c9533cfdf92ca2b60a6"
+        }
+      },
+      "urls": {
+        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
+        "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-7.3.5-1/",
+        "archive_org": null
+      }
+    },
+    {
+      "flavor": "linux-arxos-zen",
       "version": "7.3.4-1",
       "upstream": "Linux 7.3.4",
       "date": "2026-11",
-      "status": "current",
+      "status": "retired",
       "changes": "Linux 7.3.4, built and published by the ARXOS kernel pipeline: hardening gate GREEN and a boot to userspace with taint 0, lockdown in integrity mode and no kernel warning. Gaming: huge pages always, NTSYNC built in, sched-ext. Same ARXOS patches and settings as the previous release.",
       "artifacts": {
         "kernel": {
@@ -63,7 +138,7 @@
         }
       },
       "urls": {
-        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
+        "r2": null,
         "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-zen-7.3.4-1/",
         "archive_org": "https://archive.org/download/arxos-linux-arxos-zen-7.3.4-1/"
       },
@@ -74,7 +149,7 @@
       "version": "7.3.4-1",
       "upstream": "Linux 7.3.4",
       "date": "2026-11",
-      "status": "current",
+      "status": "retired",
       "changes": "Linux 7.3.4, built and published by the ARXOS kernel pipeline: hardening gate GREEN and a boot to userspace with taint 0, lockdown in integrity mode and no kernel warning. Real-time (PREEMPT_RT). Same ARXOS patches and settings as the previous release.",
       "artifacts": {
         "kernel": {
@@ -89,7 +164,7 @@
         }
       },
       "urls": {
-        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
+        "r2": null,
         "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-rt-7.3.4-1/",
         "archive_org": "https://archive.org/download/arxos-linux-arxos-rt-7.3.4-1/"
       },
@@ -100,7 +175,7 @@
       "version": "7.3.4-1",
       "upstream": "Linux 7.3.4",
       "date": "2026-11",
-      "status": "current",
+      "status": "retired",
       "changes": "Linux 7.3.4, built and published by the ARXOS kernel pipeline: hardening gate GREEN and a boot to userspace with taint 0, lockdown in integrity mode and no kernel warning. Same ARXOS patches and settings as the previous release.",
       "artifacts": {
         "kernel": {
@@ -115,7 +190,7 @@
         }
       },
       "urls": {
-        "r2": "https://pub-d5ff3efb1d204998aa120ded02d070b9.r2.dev/kernels/",
+        "r2": null,
         "github": "https://github.com/thearxos/arxos-kernels/releases/download/linux-arxos-7.3.4-1/",
         "archive_org": "https://archive.org/download/arxos-linux-arxos-7.3.4-1/"
       },

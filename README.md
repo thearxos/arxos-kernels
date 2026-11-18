@@ -12,15 +12,15 @@ Binaries are hosted in more than one place so nothing ever disappears:
 - **GitHub Releases** — every kernel version (ISOs are too large for Releases).
 - **archive.org** — a durable mirror of every kernel and ISO, for the long haul.
 
-_Manifests updated 2026-11-16._
+_Manifests updated 2026-11-18._
 
 ## Kernels
 
 | Flavor | Role | Base | Current |
 | --- | --- | --- | --- |
-| `linux-arxos` | default daily driver, newest mainline | ArxOS tuned | 7.3.4-1 |
-| `linux-arxos-rt` | real-time (RF, SDR, wireless capture) | ArxOS tuned | 7.3.4-1 |
-| `linux-arxos-zen` | gaming: huge pages always, NTSYNC built in for Windows games, sched-ext schedulers | ArxOS tuned | 7.3.4-1 |
+| `linux-arxos` | default daily driver, newest mainline | ArxOS tuned | 7.3.5-1 |
+| `linux-arxos-rt` | real-time (RF, SDR, wireless capture) | ArxOS tuned | 7.3.5-1 |
+| `linux-arxos-zen` | gaming: huge pages always, NTSYNC built in for Windows games, sched-ext schedulers | ArxOS tuned | 7.3.5-1 |
 | `linux-arxos-stable` | retired: the 7.2 stable series reached end of life upstream and gets no more security fixes | ArxOS tuned |  |
 
 ## What ARXOS adds
@@ -37,15 +37,40 @@ Each one is here for a reason, not for a spec sheet:
 
 Newest first. Each entry says what changed against the kernel before it.
 
-### linux-arxos-zen 7.3.4-1  (current)
+### linux-arxos-zen 7.3.5-1  (current)
+
+- **Upstream base:** Linux 7.3.5
+- **Released:** 2026-11
+- **What changed:** Linux 7.3.5, built and published by the ARXOS kernel pipeline: hardening gate GREEN and a boot to userspace with taint 0, lockdown in integrity mode and no kernel warning. Gaming: huge pages always, NTSYNC built in, sched-ext. Same ARXOS patches and settings as the previous release.
+- **Kernel:** `linux-arxos-zen-7.3.5-1-x86_64.pkg.tar.zst` (151.6 MB, sha256 `8beb3dce5880...`)
+- **Headers:** `linux-arxos-zen-headers-7.3.5-1-x86_64.pkg.tar.zst` (42.7 MB, sha256 `7ae86ce50514...`)
+
+### linux-arxos-rt 7.3.5-1  (current)
+
+- **Upstream base:** Linux 7.3.5
+- **Released:** 2026-11
+- **What changed:** Linux 7.3.5, built and published by the ARXOS kernel pipeline: hardening gate GREEN and a boot to userspace with taint 0, lockdown in integrity mode and no kernel warning. Real-time (PREEMPT_RT). Same ARXOS patches and settings as the previous release.
+- **Kernel:** `linux-arxos-rt-7.3.5-1-x86_64.pkg.tar.zst` (157.3 MB, sha256 `430b71f632c2...`)
+- **Headers:** `linux-arxos-rt-headers-7.3.5-1-x86_64.pkg.tar.zst` (44.2 MB, sha256 `75dd6ede0315...`)
+
+### linux-arxos 7.3.5-1  (current)
+
+- **Upstream base:** Linux 7.3.5
+- **Released:** 2026-11
+- **What changed:** Linux 7.3.5, built and published by the ARXOS kernel pipeline: hardening gate GREEN and a boot to userspace with taint 0, lockdown in integrity mode and no kernel warning. Same ARXOS patches and settings as the previous release.
+- **Kernel:** `linux-arxos-7.3.5-1-x86_64.pkg.tar.zst` (151.6 MB, sha256 `3dc847e394fd...`)
+- **Headers:** `linux-arxos-headers-7.3.5-1-x86_64.pkg.tar.zst` (42.7 MB, sha256 `659e469ae85b...`)
+
+### linux-arxos-zen 7.3.4-1  (retired)
 
 - **Upstream base:** Linux 7.3.4
 - **Released:** 2026-11
 - **What changed:** Linux 7.3.4, built and published by the ARXOS kernel pipeline: hardening gate GREEN and a boot to userspace with taint 0, lockdown in integrity mode and no kernel warning. Gaming: huge pages always, NTSYNC built in, sched-ext. Same ARXOS patches and settings as the previous release.
 - **Kernel:** `linux-arxos-zen-7.3.4-1-x86_64.pkg.tar.zst` (151.5 MB, sha256 `5ad66a102314...`)
 - **Headers:** `linux-arxos-zen-headers-7.3.4-1-x86_64.pkg.tar.zst` (42.7 MB, sha256 `ab599bf3acbf...`)
+- **Mirror:** archived on archive.org
 
-### linux-arxos-rt 7.3.4-1  (current)
+### linux-arxos-rt 7.3.4-1  (retired)
 
 - **Upstream base:** Linux 7.3.4
 - **Released:** 2026-11
@@ -54,7 +79,7 @@ Newest first. Each entry says what changed against the kernel before it.
 - **Headers:** `linux-arxos-rt-headers-7.3.4-1-x86_64.pkg.tar.zst` (44.2 MB, sha256 `b53bf07ee89c...`)
 - **Mirror:** archived on archive.org
 
-### linux-arxos 7.3.4-1  (current)
+### linux-arxos 7.3.4-1  (retired)
 
 - **Upstream base:** Linux 7.3.4
 - **Released:** 2026-11
